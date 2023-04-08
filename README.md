@@ -1,64 +1,107 @@
-Greetings and welcome to the Bike24 Frontend challenge
+# Bicycle e-commerce
 
-![UI example](https://github.com/Bike24/FrontendCodingChallenge/blob/main/assets/ui_example.png?raw=true)
+![Desktop Preview](desktop-preview.jpg)
 
-&nbsp;
-&nbsp;
+## What does it do?
 
-## The rules
--   The visualisation above is just a suggestion, it's up to **you** to implement it according to **your imagination**
+[ ]  As a customer I want to be able to select products from the drop down list.
 
--   Focus on **code quality** and **best practices**
+[ ]  As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
 
--   We expect some unit- and integration-tests. Use the testing frameworks you like
+[ ]  As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
 
--   Using **Typescript** is mandatory
+[ ]  As a customer I want to be able to see all my products in the shopping cart
 
--   Provide your code in a github repository. We will execute it locally and may not know which node.js version you have used.
+[ ]  As a customer I want to be able to see the unit price in my shopping cart.
 
--   Imagine how you would deploy such a app with a **cloud provider,** take some notes in the **Readme**
+[ ] There is a value "taxRate" that calculate the gross price for each product.
 
--   You can use libraries, but maybe we ask why exactly this one
+[ ]  As a customer I want to be able to see the total of the shopping cart at any time
 
--   Please **avoid** a **single commit** at the end, we are also interested in the commit history :)
+[ ]  As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
 
-_Hint: You will find the products in the data folder_ 
+[ ]  It's not allowed to add more than 10 different product types in the shopping cart. As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
 
-&nbsp;
-&nbsp;
+[ ]  As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
 
+[ ]  It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product. As a customer I want to be able to select the quantity of products with a slider
 
-## The task
+## What is inside?
 
-_Try to imagine a wild product owner approaching you and wanting to improve the shopping experience for our customers. The following requirements are specified_
+This project uses many tools like:
 
+- [Vite](https://vitejs.dev)
+- [ReactJS](https://reactjs.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [Vitest](https://vitest.dev)
+- [Testing Library](https://testing-library.com)
+- [Tailwindcss](https://tailwindcss.com)
+- [Eslint](https://eslint.org)
+- [Prettier](https://prettier.io)
 
-**Try to imagine a wild :upside_down_face: product owner approaching you and wanting to improve the shopping experience for our customers. The following requirements are specified*
+## Getting Started
 
--   As a customer I want to be able to select products from the drop down list.
+For this project I used Node.js v19.7.0 and PNPM v7.30.0
 
--   As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
+### Install
 
--   As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
+Clone this project
 
--   As a customer I want to be able to see all my products in the shopping cart
+```bash
+git clone https://github.com/ViniciusLagoGehrke/bike_E-commerce.git
+```
 
--   As a customer I want to be able to see the unit price in my shopping cart. Optional task: there is a value "taxRate" provided - use it to calculate the gross price for each product.
+Access the project directory.
 
--   As a customer I want to be able to see the total of the shopping cart at any time
+```bash
+cd bike_E-commerce
+```
 
--   As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
+Install dependencies. (I suggest using PNPM)
 
--   It's not allowed to add more than 10 different product types in the shopping cart. As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
+```bash
+pnpm install
+```
 
--   As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
+Serve with hot reload at <http://localhost:5173>.
 
--   It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product. As a customer I want to be able to select the quantity of products with a slider
- 
- 
-&nbsp;
-&nbsp;
-&nbsp;
+```bash
+pnpm run dev
+```
 
+### Lint
 
-### Good luck
+```bash
+pnpm run lint
+```
+
+### Typecheck
+
+```bash
+pnpm run typecheck
+```
+
+### Build
+
+```bash
+pnpm run build
+```
+
+### Test
+
+```bash
+pnpm run test
+```
+
+View and interact with your tests via UI. (Awesone vitest feature!)
+
+```bash
+pnpm run test:ui
+```
+
+## Deployment
+
+I deployed this project in Vercel where you can Log in with GitHub, GitLab, Bitbucket, or email to deploy websites for free with zero configuration, automatic SSL, and global CDN.
+
+You can check it live here: [Bike E-Commerce]()
+
