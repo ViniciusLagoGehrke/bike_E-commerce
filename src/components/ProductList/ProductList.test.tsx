@@ -1,14 +1,16 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import ProductList from './ProductList'
 import products from '../../../data/products.json'
 
 describe('ProductList', () => {
   it('renders a dropdown with product names', () => {
     const handleChange = vi.fn()
-    render(<ProductList list={products} handleChange={handleChange} />)
-    const dropdown = screen.getByRole('menu')
-    const options = screen.getAllByRole('option')
+    const { getAllByRole, getByRole } = render(
+      <ProductList list={products} handleChange={handleChange} />
+    )
+    const dropdown = getByRole('menu')
+    const options = getAllByRole('option')
 
     expect(dropdown).toBeInTheDocument()
     expect(options).toHaveLength(products.length)
@@ -16,8 +18,10 @@ describe('ProductList', () => {
 
   it('calls handleChange when a product is selected', () => {
     const handleChange = vi.fn()
-    render(<ProductList list={products} handleChange={handleChange} />)
-    const dropdown = screen.getByRole('menu')
+    const { getByRole } = render(
+      <ProductList list={products} handleChange={handleChange} />
+    )
+    const dropdown = getByRole('menu')
     expect(dropdown).toBeInTheDocument()
 
     const selectedProduct = products[1]

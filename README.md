@@ -6,7 +6,7 @@
 
 [x]  As a customer I want to be able to select products from the drop down list.
 
-[ ]  As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
+[x]  As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
 
 [ ]  As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
 

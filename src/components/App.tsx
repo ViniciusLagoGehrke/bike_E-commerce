@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import ProductList from './ProductList'
+import QuantitySelector from './QuantitySelector'
 import { ProductType } from '../types'
 import products from '../../data/products.json'
 
 function App() {
   const [selected, setSelected] = useState<ProductType | null>(null)
+  const [quantity, setQuantity] = useState<number>(1)
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedProductId = event.target.value
@@ -12,6 +14,10 @@ function App() {
       (product) => product.id === selectedProductId
     )
     setSelected(selectedProduct || null)
+  }
+
+  const handleAmountChange = (selectedQuantity: number) => {
+    setQuantity(selectedQuantity)
   }
 
   return (
@@ -23,8 +29,13 @@ function App() {
               Your Shop!
             </h1>
             <ProductList list={products} handleChange={handleChange} />
+            <QuantitySelector
+              maxAmount={selected?.maxAmount ?? 1}
+              handleAmountChange={handleAmountChange}
+            />
           </div>
           {selected ? <p>{selected.productName}</p> : null}
+          <p>{quantity}</p>
         </div>
       </div>
     </div>
