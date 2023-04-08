@@ -5,12 +5,18 @@ import App from './App'
 describe('<App />', () => {
   it('should render the App', () => {
     render(<App />)
+    const heading = screen.getByRole('heading', {
+      name: /Your Shop!/i,
+      level: 1
+    })
 
-    expect(
-      screen.getByRole('heading', {
-        name: /Welcome!/i,
-        level: 1
-      })
-    ).toBeInTheDocument()
+    expect(heading).toBeInTheDocument()
+  })
+
+  it('should contain a Product Dropdown', () => {
+    render(<App />)
+
+    const dropdown = screen.getByRole('menu')
+    expect(dropdown).toBeInTheDocument()
   })
 })
