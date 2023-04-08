@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 
 import App from './App'
 
 describe('<App />', () => {
   it('should render the App', () => {
-    render(<App />)
-    const heading = screen.getByRole('heading', {
+    const { getByRole } = render(<App />)
+    const heading = getByRole('heading', {
       name: /Your Shop!/i,
       level: 1
     })
@@ -14,9 +14,9 @@ describe('<App />', () => {
   })
 
   it('should contain a Product Dropdown', () => {
-    render(<App />)
+    const { getByRole } = render(<App />)
 
-    const dropdown = screen.getByRole('menu')
+    const dropdown = getByRole('menu')
     expect(dropdown).toBeInTheDocument()
   })
 })

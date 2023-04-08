@@ -7,3 +7,6 @@ type ProductValueForKey<K extends ProductKeys> = K extends 'id' | 'productName'
 export type ProductType = {
   [K in ProductKeys]: ProductValueForKey<K>
 }
+
+export type CartItemType = Omit<ProductType, 'maxAmount'> &
+  Record<'quantity', number>

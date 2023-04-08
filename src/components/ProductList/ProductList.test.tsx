@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { vi } from 'vitest'
 import { render, fireEvent } from '@testing-library/react'
 import ProductList from './ProductList'
 import products from '../../../data/products.json'
