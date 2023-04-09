@@ -2,7 +2,7 @@ import { useState } from 'react'
 import ProductList from './ProductList'
 import QuantitySelector from './QuantitySelector'
 import Button from '../Button'
-import { useShoppingCart } from '../../Store/ShoppingCart'
+import { useShoppingCart } from '../../store/ShoppingCart'
 import { ProductType, CartItemType } from '../../types'
 
 type ProductFormPros = {

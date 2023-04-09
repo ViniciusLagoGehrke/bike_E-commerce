@@ -1,5 +1,5 @@
 import ProgressBar from './ProgressBar'
-import { useShoppingCart } from '../../Store/ShoppingCart'
+import { useShoppingCart } from '../../store/ShoppingCart'
 
 function Footer() {
   const { state } = useShoppingCart()

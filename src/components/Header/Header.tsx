@@ -1,5 +1,5 @@
 import { ShoppingCartIcon } from '../../assets/ShoppingCart'
-import { useShoppingCart } from '../../Store/ShoppingCart'
+import { useShoppingCart } from '../../store/ShoppingCart'
 
 function Header() {
   const { state, dispatch } = useShoppingCart()

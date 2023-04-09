@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { ShoppingCartProvider } from '../../Store/ShoppingCart'
+import { ShoppingCartProvider } from '../../store/ShoppingCart'
 import Header from './Header'
 
 describe('Header', () => {

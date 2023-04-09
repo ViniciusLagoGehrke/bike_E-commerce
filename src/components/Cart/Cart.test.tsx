@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from './Cart'
-import { ShoppingCartProvider } from '../../Store/ShoppingCart'
+import { ShoppingCartProvider } from '../../store/ShoppingCart'
 
 describe('Cart', () => {
   const mockItems = [
@@ -65,8 +65,7 @@ describe('Cart', () => {
     const buyButton = screen.getByText('Buy!')
     fireEvent.click(buyButton)
 
-    expect(window.alert).toHaveBeenCalledWith('Purchase Confirmed!')
     expect(mockDispatch).toHaveBeenCalledTimes(1)
-    expect(mockDispatch).toHaveBeenCalledWith({ type: 'CLEAR_CART' })
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'PURCHASE' })
   })
 })

@@ -1,23 +1,16 @@
 import { TrashIcon } from '../../assets/TrashIcon'
-import { useShoppingCart } from '../../Store/ShoppingCart'
+import { useShoppingCart } from '../../store/ShoppingCart'
 import { CartItemType } from '../../types'
 
 type CartItemProps = Omit<CartItemType, 'maxAmount'>
 
-function CartItem({
-  index,
-  productName,
-  taxRate,
-  price,
-  quantity
-}: CartItemProps) {
+function CartItem({ index, productName, price, quantity }: CartItemProps) {
   const { dispatch } = useShoppingCart()
 
   const handleItemRemove = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: { index: index as number } })
   }
-  // Todo
-  console.log(taxRate)
+
   return (
     <tr data-testid="cart-item" className="border-b last:border-none">
       <td

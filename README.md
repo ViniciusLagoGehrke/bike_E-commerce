@@ -24,7 +24,7 @@
 
 [x] As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
 
-[ ] As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
+[x] As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
 
 [x] It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product.
 

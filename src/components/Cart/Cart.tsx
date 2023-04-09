@@ -1,7 +1,7 @@
 import { CartItemType } from '../../types'
 import CartItem from './CartItem'
 import Button from '../Button'
-import { useShoppingCart } from '../../Store/ShoppingCart'
+import { useShoppingCart } from '../../store/ShoppingCart'
 
 type itemsProp = Omit<CartItemType, 'index'>[]
 
@@ -13,8 +13,7 @@ function Cart() {
   }
 
   const handlePurchase = () => {
-    alert('Purchase Confirmed!')
-    dispatch({ type: 'CLEAR_CART' })
+    dispatch({ type: 'PURCHASE' })
   }
 
   function renderItems(items: itemsProp) {
