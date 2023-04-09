@@ -1,4 +1,5 @@
 export type ButtonProps = {
+  className?: string
   title: string
   buttonStyle?: 'primary' | 'secondary'
   buttonType?: 'submit' | 'button' | 'link'
@@ -6,6 +7,7 @@ export type ButtonProps = {
 }
 
 function Button({
+  className = '',
   title,
   buttonStyle = 'primary',
   buttonType = 'submit',
@@ -19,12 +21,12 @@ function Button({
   return (
     <>
       {buttonType === 'link' ? (
-        <a className={styleClass} href="/" />
+        <a className={styleClass + className} href="/" />
       ) : (
         <button
           type={buttonType}
           onClick={onClick}
-          className={`${styleClass} flex h-10 items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm`}
+          className={`${styleClass} ${className} flex h-10 items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm`}
         >
           {title}
         </button>

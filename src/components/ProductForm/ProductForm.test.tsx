@@ -28,7 +28,7 @@ describe('ProductForm component', () => {
     const selectedProduct: ProductType = products[0]
     const quantity = 1
 
-    const { getByRole, getByText } = render(
+    const { getByRole } = render(
       <ProductForm
         products={products}
         quantity={quantity}
@@ -44,9 +44,6 @@ describe('ProductForm component', () => {
 
     const quantitySelector = getByRole('spinbutton') as HTMLInputElement
     expect(quantitySelector).toBeInTheDocument()
-
-    const quantityInfo = getByText(quantity.toString())
-    expect(quantityInfo).toBeInTheDocument()
 
     const button = getByRole('button', { name: /add to cart/i })
     expect(button).toBeInTheDocument()

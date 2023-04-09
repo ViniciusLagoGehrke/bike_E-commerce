@@ -7,7 +7,7 @@ type DropdownProps = {
 
 function ProductList({ list, handleChange }: DropdownProps) {
   return (
-    <div className="flex flex-col pl-2">
+    <div className="mb-2 flex flex-col pl-2">
       <label htmlFor="product-dropdown" />
       <select
         className="h-10 rounded-md border border-slate-300 bg-white p-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-sky-500 focus:outline-none focus:ring-1

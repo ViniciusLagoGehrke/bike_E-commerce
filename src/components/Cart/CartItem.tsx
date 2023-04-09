@@ -9,7 +9,7 @@ function CartItem({
 }: CartItemType) {
   console.log(taxRate)
   return (
-    <tr>
+    <tr className="border-b last:border-none">
       <td className="text-center font-normal">{index + 1}</td>
       <td className="text-center font-normal">{productName}</td>
       <td className="text-center font-normal">${price}</td>

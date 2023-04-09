@@ -24,7 +24,7 @@ function QuantitySelector({
     handleAmountChange(selectedQuantity)
   }
   return (
-    <div className="flex flex-col pl-2">
+    <div className="mb-2 flex flex-col pl-2">
       <label htmlFor="quantity" />
       <input
         className="h-10 w-16 rounded-md border border-slate-300 bg-white p-2 text-sm shadow-sm placeholder:text-slate-400 invalid:border-pink-500

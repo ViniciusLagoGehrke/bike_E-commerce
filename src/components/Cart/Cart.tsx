@@ -31,12 +31,12 @@ function Cart({ isCartClosed, items }: CartProps) {
     <aside
       className={`${
         isCartClosed ? 'hidden' : 'absolute'
-      } right-0 flex h-full w-full flex-col justify-between border-l bg-slate-50 sm:w-96`}
+      } right-0 flex h-full w-full flex-col justify-between border-l bg-slate-50 px-2 sm:w-5/12 sm:min-w-fit`}
     >
       <div className="overflow-y-scroll">
         {items ? (
-          <table className="mx-auto mt-2 table w-full table-auto px-2 sm:text-base">
-            <tr className="h-8">
+          <table className="mx-auto mt-2 table w-full table-auto px-2 text-sm sm:text-base">
+            <tr className="h-8 border-b-2 border-b-black">
               <th className="font-medium">Nº</th>
               <th className="font-medium">Product</th>
               <th className="font-medium">Unit Price</th>
