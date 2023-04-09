@@ -28,7 +28,8 @@ describe('Header', () => {
     total: 50,
     maxProductsReached: false,
     MAX_ITEMS: 10,
-    isCartClosed: true
+    isCartClosed: true,
+    message: ''
   }
 
   const mockDispatch = vi.fn()

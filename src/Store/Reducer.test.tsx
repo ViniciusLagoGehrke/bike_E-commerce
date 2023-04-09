@@ -1,8 +1,17 @@
 import { useReducer } from 'react'
 import { renderHook, act } from '@testing-library/react'
-import cartReducer, { initialState } from './reducer'
+import cartReducer, { initialState } from './Reducer'
 
 describe('cartReducer', () => {
+  const initialResult = {
+    MAX_ITEMS: 10,
+    cartItems: [],
+    isCartClosed: true,
+    maxProductsReached: false,
+    message: null,
+    total: 0
+  }
+
   it('should add an item to the cart', () => {
     const item = {
       id: '1',
@@ -21,9 +30,9 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: [item],
-      total: 10,
-      maxProductsReached: false
+      total: 10
     })
   })
 
@@ -57,6 +66,7 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: [
         {
           id: '1',
@@ -68,8 +78,7 @@ describe('cartReducer', () => {
           index: 0
         }
       ],
-      total: 30,
-      maxProductsReached: false
+      total: 30
     })
   })
 
@@ -93,9 +102,9 @@ describe('cartReducer', () => {
     )
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: items.slice(0, 10),
-      total: 100,
-      maxProductsReached: false
+      total: 100
     })
 
     act(() => {
@@ -103,9 +112,10 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: items.slice(0, 10),
-      total: 100,
-      maxProductsReached: true
+      maxProductsReached: true,
+      total: 100
     })
   })
 
@@ -127,9 +137,7 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
-      cartItems: [],
-      total: 0,
-      maxProductsReached: false
+      ...initialResult
     })
   })
 
@@ -153,9 +161,9 @@ describe('cartReducer', () => {
     )
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: [item],
-      total: 50,
-      maxProductsReached: false
+      total: 50
     })
 
     act(() => {
@@ -163,9 +171,7 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
-      cartItems: [],
-      total: 0,
-      maxProductsReached: false
+      ...initialResult
     })
   })
 
@@ -189,9 +195,9 @@ describe('cartReducer', () => {
     )
 
     expect(result.current[0]).toEqual({
+      ...initialResult,
       cartItems: items.slice(0, 10),
-      total: 100,
-      maxProductsReached: false
+      total: 100
     })
 
     act(() => {
@@ -199,9 +205,8 @@ describe('cartReducer', () => {
     })
 
     expect(result.current[0]).toEqual({
-      cartItems: [],
-      total: 0,
-      maxProductsReached: false
+      ...initialResult,
+      isCartClosed: false
     })
   })
 })
