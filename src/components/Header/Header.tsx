@@ -1,4 +1,4 @@
-import { ShoppingCart } from './ShoppingCart'
+import { ShoppingCartIcon } from '../../assets/ShoppingCart'
 import { useShoppingCart } from '../../Store/ShoppingCart'
 
 function Header() {
@@ -15,14 +15,14 @@ function Header() {
         Your Shop!
       </h1>
       <aside
-        className="flex items-center justify-around sm:w-40"
+        className="flex items-center justify-between pr-2 sm:w-44"
         onClick={toggleCart}
         data-testid="shopping-cart-toggle"
       >
-        <div>{ShoppingCart}</div>
         <div>
-          <h3 className="font-bold">Total: ${state.total}</h3>
+          <h3 className="font-bold">Total: ${state.total.toFixed(2)}</h3>
         </div>
+        <div>{ShoppingCartIcon}</div>
       </aside>
     </header>
   )

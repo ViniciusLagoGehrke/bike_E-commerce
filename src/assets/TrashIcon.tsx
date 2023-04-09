@@ -1,33 +1,46 @@
-export const ShoppingCart = (
+export const TrashIcon = (
   <svg
-    width="2rem"
-    height="2rem"
+    width="1rem"
+    height="1rem"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 256"
   >
     <rect width="256" height="256" fill="none" />
+    <line
+      x1="216"
+      y1="56"
+      x2="40"
+      y2="56"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="16"
+    />
+    <line
+      x1="104"
+      y1="104"
+      x2="104"
+      y2="168"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="16"
+    />
+    <line
+      x1="152"
+      y1="104"
+      x2="152"
+      y2="168"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="16"
+    />
     <path
-      d="M180,184H83.17a16,16,0,0,1-15.74-13.14L41.92,30.57A8,8,0,0,0,34.05,24H16"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="16"
-    />
-    <circle
-      cx="84"
-      cy="204"
-      r="20"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="16"
-    />
-    <circle
-      cx="180"
-      cy="204"
-      r="20"
+      d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56"
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
@@ -35,7 +48,7 @@ export const ShoppingCart = (
       strokeWidth="16"
     />
     <path
-      d="M62.55,144H188.1a16,16,0,0,0,15.74-13.14L216,64H48"
+      d="M168,56V40a16,16,0,0,0-16-16H104A16,16,0,0,0,88,40V56"
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"

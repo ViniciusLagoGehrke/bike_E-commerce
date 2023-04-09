@@ -18,15 +18,15 @@
 
 [x] As a customer I want to be able to see the total of the shopping cart at any time
 
-[ ] As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
+[x] As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
 
-[ ] It's not allowed to add more than 10 different product types in the shopping cart.
+[x] It's not allowed to add more than 10 different product types in the shopping cart.
 
 [x] As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
 
 [ ] As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
 
-[ ] It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product.
+[x] It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product.
 
 [ ] As a customer I want to be able to select the quantity of products with a slider
 

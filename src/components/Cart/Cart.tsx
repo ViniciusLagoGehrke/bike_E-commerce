@@ -44,11 +44,11 @@ function Cart() {
         <table className="mx-auto mt-2 table w-full table-auto px-2 text-sm sm:text-base">
           <thead className="h-8 border-b-2 border-b-black">
             <tr>
-              <th className="font-medium">Nº</th>
-              <th className="font-medium">Product</th>
-              <th className="font-medium">Unit Price</th>
-              <th className="font-medium">Amount</th>
-              <th className="font-medium">Price</th>
+              <th className="w-5"></th>
+              <th className="text-left font-medium">Product</th>
+              <th className="text-left font-medium">Unit Price</th>
+              <th className="text-left font-medium">Amount</th>
+              <th className="text-left font-medium">Price</th>
             </tr>
           </thead>
           <tbody>{state.cartItems ? renderItems(state.cartItems) : null}</tbody>
