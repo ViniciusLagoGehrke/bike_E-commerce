@@ -16,8 +16,9 @@ function ProductList({ list, handleChange }: DropdownProps) {
         id="product-dropdown"
         role="menu"
         onChange={handleChange}
+        defaultValue=""
       >
-        <option value="" disabled hidden>
+        <option value="" hidden>
           Select a Product
         </option>
         {list?.map((item) => (

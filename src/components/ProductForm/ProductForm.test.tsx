@@ -22,22 +22,7 @@ const products: ProductType[] = [
 
 describe('ProductForm component', () => {
   it('renders ProductList, QuantitySelector, Button, and selected product info', () => {
-    const handleAddToCart = vi.fn()
-    const handleChange = vi.fn()
-    const handleAmountChange = vi.fn()
-    const selectedProduct: ProductType = products[0]
-    const quantity = 1
-
-    const { getByRole } = render(
-      <ProductForm
-        products={products}
-        quantity={quantity}
-        selected={selectedProduct}
-        handleAddToCart={handleAddToCart}
-        handleChange={handleChange}
-        handleAmountChange={handleAmountChange}
-      />
-    )
+    const { getByRole } = render(<ProductForm products={products} />)
 
     const productList = getByRole('menu')
     expect(productList).toBeInTheDocument()
@@ -51,21 +36,8 @@ describe('ProductForm component', () => {
 
   it('calls handleAddToCart when form is submitted', () => {
     const handleAddToCart = vi.fn()
-    const handleChange = vi.fn()
-    const handleAmountChange = vi.fn()
-    const selectedProduct: ProductType = products[0]
-    const quantity = 1
 
-    const { getByTestId } = render(
-      <ProductForm
-        products={products}
-        quantity={quantity}
-        selected={selectedProduct}
-        handleAddToCart={handleAddToCart}
-        handleChange={handleChange}
-        handleAmountChange={handleAmountChange}
-      />
-    )
+    const { getByTestId } = render(<ProductForm products={products} />)
 
     const form = getByTestId('product-form')
     fireEvent.submit(form)
@@ -74,22 +46,9 @@ describe('ProductForm component', () => {
   })
 
   it('calls handleChange when product selection changes', () => {
-    const handleAddToCart = vi.fn()
     const handleChange = vi.fn()
-    const handleAmountChange = vi.fn()
-    const selectedProduct: ProductType = products[0]
-    const quantity = 1
 
-    const { getByRole } = render(
-      <ProductForm
-        products={products}
-        quantity={quantity}
-        selected={selectedProduct}
-        handleAddToCart={handleAddToCart}
-        handleChange={handleChange}
-        handleAmountChange={handleAmountChange}
-      />
-    )
+    const { getByRole } = render(<ProductForm products={products} />)
 
     const dropdown = getByRole('menu')
     fireEvent.change(dropdown, { target: { value: '2' } })
@@ -98,22 +57,9 @@ describe('ProductForm component', () => {
   })
 
   it('calls handleAmountChange when quantity selection changes', () => {
-    const handleAddToCart = vi.fn()
-    const handleChange = vi.fn()
     const handleAmountChange = vi.fn()
-    const selectedProduct: ProductType = products[0]
-    const quantity = 1
 
-    const { getByRole } = render(
-      <ProductForm
-        products={products}
-        quantity={quantity}
-        selected={selectedProduct}
-        handleAddToCart={handleAddToCart}
-        handleChange={handleChange}
-        handleAmountChange={handleAmountChange}
-      />
-    )
+    const { getByRole } = render(<ProductForm products={products} />)
     const quantitySelect = getByRole('spinbutton') as HTMLInputElement
 
     fireEvent.change(quantitySelect, { target: { value: '2' } })

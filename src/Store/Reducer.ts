@@ -4,17 +4,25 @@ export type State = {
   cartItems: CartItemType[]
   total: number
   maxProductsReached: boolean
+  MAX_ITEMS: number
+  isCartClosed: boolean
 }
 
 export type Action =
   | { type: 'ADD_ITEM'; payload: { item: CartItemType } }
   | { type: 'REMOVE_ITEM'; payload: { index: number } }
   | { type: 'CLEAR_CART' }
+  | { type: 'OPEN_CART' }
+  | { type: 'CLOSE_CART' }
+
+const MAX_ITEMS = 10
 
 export const initialState: State = {
   cartItems: [],
   total: 0,
-  maxProductsReached: false
+  maxProductsReached: false,
+  MAX_ITEMS,
+  isCartClosed: true
 }
 
 const cartReducer = (state: State, action: Action): State => {
@@ -91,7 +99,13 @@ const cartReducer = (state: State, action: Action): State => {
     }
 
     case 'CLEAR_CART':
-      return { ...initialState }
+      return { ...initialState, isCartClosed: false }
+
+    case 'OPEN_CART':
+      return { ...state, isCartClosed: false }
+
+    case 'CLOSE_CART':
+      return { ...state, isCartClosed: true }
 
     default:
       return state

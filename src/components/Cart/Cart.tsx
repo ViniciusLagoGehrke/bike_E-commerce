@@ -1,15 +1,22 @@
 import { CartItemType } from '../../types'
 import CartItem from './CartItem'
 import Button from '../Button'
+import { useShoppingCart } from '../../Store/ShoppingCart'
 
 type itemsProp = Omit<CartItemType, 'index'>[]
 
-type CartProps = {
-  isCartClosed: boolean
-  items: itemsProp
-}
+function Cart() {
+  const { state, dispatch } = useShoppingCart()
 
-function Cart({ isCartClosed, items }: CartProps) {
+  const handleClearCart = () => {
+    dispatch({ type: 'CLEAR_CART' })
+  }
+
+  const handlePurchase = () => {
+    alert('Purchase Confirmed!')
+    dispatch({ type: 'CLEAR_CART' })
+  }
+
   function renderItems(items: itemsProp) {
     return (
       items.length > 0 &&
@@ -30,26 +37,30 @@ function Cart({ isCartClosed, items }: CartProps) {
   return (
     <aside
       className={`${
-        isCartClosed ? 'hidden' : 'absolute'
+        state.isCartClosed ? 'hidden' : 'absolute'
       } right-0 flex h-full w-full flex-col justify-between border-l bg-slate-50 px-2 sm:w-5/12 sm:min-w-fit`}
     >
       <div className="overflow-y-scroll">
-        {items ? (
-          <table className="mx-auto mt-2 table w-full table-auto px-2 text-sm sm:text-base">
-            <tr className="h-8 border-b-2 border-b-black">
+        <table className="mx-auto mt-2 table w-full table-auto px-2 text-sm sm:text-base">
+          <thead className="h-8 border-b-2 border-b-black">
+            <tr>
               <th className="font-medium">Nº</th>
               <th className="font-medium">Product</th>
               <th className="font-medium">Unit Price</th>
               <th className="font-medium">Amount</th>
               <th className="font-medium">Price</th>
             </tr>
-            {renderItems(items)}
-          </table>
-        ) : null}
+          </thead>
+          <tbody>{state.cartItems ? renderItems(state.cartItems) : null}</tbody>
+        </table>
       </div>
       <footer className="flex w-full justify-around py-2">
-        <Button title="Clear Cart" buttonStyle="secondary" />
-        <Button title="Buy!" />
+        <Button
+          title="Clear Cart"
+          buttonStyle="secondary"
+          onClick={handleClearCart}
+        />
+        <Button title="Buy!" onClick={handlePurchase} />
       </footer>
     </aside>
   )

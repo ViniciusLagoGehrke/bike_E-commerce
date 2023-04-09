@@ -1,15 +1,15 @@
 import ProgressBar from './ProgressBar'
+import { useShoppingCart } from '../../Store/ShoppingCart'
 
-const MAX_ITEMS = 10
-
-type FooterProps = {
-  totalItems: number
-}
-
-function Footer({ totalItems = 0 }: FooterProps) {
+function Footer() {
+  const { state } = useShoppingCart()
   return (
     <footer className="flex h-14 items-center justify-center border-t bg-blue-50">
-      <ProgressBar min={0} max={MAX_ITEMS} progress={totalItems} />
+      <ProgressBar
+        min={0}
+        max={state.MAX_ITEMS}
+        progress={state.cartItems.length}
+      />
     </footer>
   )
 }
