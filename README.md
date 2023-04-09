@@ -20,7 +20,9 @@
 
 [ ] As a customer I want to be able to remove products from the shopping cart either one by one or by all at one by pressing the "clear Cart" button.
 
-[ ] It's not allowed to add more than 10 different product types in the shopping cart. As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
+[ ] It's not allowed to add more than 10 different product types in the shopping cart.
+
+[x] As a customer I want to be able to see a visual representation of how many product types I can still add in a progress bar on the bottom.
 
 [ ] As a customer I want to see a graphical overlay when I confirm the purchase to know that my order was successful
 

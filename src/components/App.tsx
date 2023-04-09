@@ -4,6 +4,7 @@ import ProductForm from './ProductForm'
 import Cart from './Cart'
 import { ProductType } from '../types'
 import products from '../../data/products.json'
+import Footer from './Footer'
 
 function App() {
   const [selected, setSelected] = useState<ProductType | null>(null)
@@ -35,11 +36,46 @@ function App() {
     {
       ...products[1],
       quantity
+    },
+    {
+      ...products[2],
+      quantity
+    },
+    {
+      ...products[3],
+      quantity
+    },
+    {
+      ...products[4],
+      quantity
+    },
+    {
+      ...products[5],
+      quantity
+    },
+    {
+      ...products[6],
+      quantity
+    },
+    {
+      ...products[7],
+      quantity
+    },
+    {
+      ...products[8],
+      quantity
+    },
+    {
+      ...products[9],
+      quantity
     }
   ]
 
-  const calculateTotal = () => {
-    return cartItems.reduce((acc, cur) => acc + cur.quantity * cur.price, 0)
+  const calculateTotal = (
+    items: (ProductType & { quantity: number })[]
+  ): number => {
+    const sum = items.reduce((acc, cur) => acc + cur.quantity * cur.price, 0)
+    return parseFloat(sum.toFixed(2))
   }
 
   const handleAddToCart = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,9 +85,9 @@ function App() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto flex h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+      <div className="flex h-screen w-screen flex-col">
         <div className="relative flex flex-auto flex-col">
-          <Header toggle={toggleCart} totalAmount={calculateTotal()} />
+          <Header toggle={toggleCart} totalAmount={calculateTotal(cartItems)} />
           <div className="relative flex flex-auto">
             <main className="flex-auto py-2">
               <ProductForm
@@ -66,9 +102,7 @@ function App() {
             <Cart isCartClosed={isCartClosed} items={cartItems} />
           </div>
         </div>
-        <footer className="flex h-14 items-center justify-center bg-orange-300">
-          <p>Progress Bar</p>
-        </footer>
+        <Footer totalItems={3} />
       </div>
     </div>
   )
