@@ -8,5 +8,7 @@ export type ProductType = {
   [K in ProductKeys]: ProductValueForKey<K>
 }
 
-export type CartItemType = Omit<ProductType, 'maxAmount'> &
-  Record<'quantity', number>
+export type CartItemType = Omit<ProductType, 'maxAmount'> & {
+  quantity: number
+  index: number
+}
