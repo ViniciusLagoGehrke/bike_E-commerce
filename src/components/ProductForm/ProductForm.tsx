@@ -13,7 +13,7 @@ const initialState = {
   id: '',
   productName: '',
   price: 0,
-  maxAmount: 0,
+  maxAmount: 10,
   taxRate: 0,
   quantity: 1
 }
@@ -24,7 +24,8 @@ function ProductForm({ products }: ProductFormPros) {
   const { dispatch } = useShoppingCart()
 
   // Do not wrap in useMemo, Should be computed on every render
-  const subtotal = selected?.price ? selected.quantity * selected?.price : 0
+  const { quantity, price, maxAmount } = selected
+  const subtotal = price ? quantity * price : 0
 
   const handleProductSelection = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -55,15 +56,16 @@ function ProductForm({ products }: ProductFormPros) {
       <div className="flex flex-wrap items-center">
         <ProductList list={products} handleChange={handleProductSelection} />
         <QuantitySelector
-          currentAmount={selected.quantity}
-          maxAmount={selected.maxAmount}
+          key={quantity}
+          max={maxAmount}
+          defaultValue={quantity}
           handleAmountChange={handleAmountChange}
         />
         <div className="mb-2 px-4">
           <p>
-            x <span className="px-2">{selected?.price ?? 0}</span> ={' '}
+            x <span className="px-2">{price ?? 0}</span> ={' '}
             <span data-testid="subtotal" className="px-2">
-              {subtotal}
+              {subtotal.toFixed(2)}
             </span>
           </p>
         </div>

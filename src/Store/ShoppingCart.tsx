@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer } from 'react'
-import cartReducer, { State, Action, initialState } from './Reducer'
+import cartReducer, { State, Action, initialState } from './reducer'
 
 type ShoppingCartContextType = {
   state: State

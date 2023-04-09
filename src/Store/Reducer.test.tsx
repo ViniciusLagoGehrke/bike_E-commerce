@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { renderHook, act } from '@testing-library/react'
-import cartReducer, { initialState } from './Reducer'
+import cartReducer, { initialState } from './reducer'
 
 describe('cartReducer', () => {
   const initialResult = {

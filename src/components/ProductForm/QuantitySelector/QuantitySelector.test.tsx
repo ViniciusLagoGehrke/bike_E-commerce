@@ -1,64 +1,69 @@
 import { vi } from 'vitest'
-import { render, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import QuantitySelector from './QuantitySelector'
 
-describe('QuantitySelector component', () => {
-  const handleInputChangeMock = vi.fn()
-  const MAX_AMOUNT = 5
+describe('QuantitySelector', () => {
+  const mockHandleAmountChange = vi.fn()
 
   beforeEach(() => {
-    handleInputChangeMock.mockClear()
-  })
-
-  it('should render the QuantitySelector component', () => {
-    const { getByRole } = render(
+    vi.clearAllMocks()
+    render(
       <QuantitySelector
-        currentAmount={1}
-        maxAmount={MAX_AMOUNT}
-        handleAmountChange={handleInputChangeMock}
+        handleAmountChange={mockHandleAmountChange}
+        defaultValue={1}
       />
     )
-
-    const input = getByRole('spinbutton') as HTMLInputElement
-
-    expect(input).toBeInTheDocument()
-    expect(input.type).toBe('number')
-    expect(input.min).toBe('1')
-    expect(input.max).toBe('5')
-    expect(input.value).toBe('1')
   })
 
-  it('should call handleInputChange when the input value changes', () => {
-    const { getByRole } = render(
-      <QuantitySelector
-        currentAmount={1}
-        maxAmount={MAX_AMOUNT}
-        handleAmountChange={handleInputChangeMock}
-      />
-    )
+  it('renders with default props', () => {
+    const slider = screen.getByRole('slider')
+    const input = screen.getByRole('spinbutton') as HTMLInputElement
 
-    const input = getByRole('spinbutton') as HTMLInputElement
+    expect(screen.getByLabelText(/Amount/)).toBeInTheDocument()
+    expect(slider).toHaveAttribute('min', '1')
+    expect(slider).toHaveAttribute('max', '10')
+    expect(slider).toHaveAttribute('step', '1')
+    expect(slider).toHaveAttribute('defaultvalue', '1')
+    expect(input).toHaveAttribute('min', '1')
+    expect(input).toHaveAttribute('max', '10')
+    expect(input).toHaveAttribute('step', '1')
+    expect(input).toHaveAttribute('defaultvalue', '1')
+  })
 
-    fireEvent.change(input, { target: { value: '2' } })
+  it('updates the slider when the input is changed', () => {
+    const slider = screen.getByRole('slider')
+    const input = screen.getByRole('spinbutton') as HTMLInputElement
 
-    expect(handleInputChangeMock).toHaveBeenCalledTimes(1)
-    expect(handleInputChangeMock).toHaveBeenCalledWith(2)
+    fireEvent.change(input, { target: { value: '5' } })
+
+    expect(slider).toHaveAttribute('defaultvalue', '5')
+  })
+
+  it('updates the input when the slider is changed', () => {
+    const slider = screen.getByRole('slider')
+    const input = screen.getByRole('spinbutton') as HTMLInputElement
+
+    fireEvent.change(slider, { target: { value: '5' } })
+
+    expect(input).toHaveAttribute('defaultValue', '5')
+  })
+
+  it('calls handleAmountChange with the new value when either the slider or the input is changed', () => {
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '5' } })
+
+    expect(mockHandleAmountChange).toHaveBeenCalledWith(5)
+
+    fireEvent.change(screen.getByRole('slider'), { target: { value: '7' } })
+
+    expect(mockHandleAmountChange).toHaveBeenCalledWith(7)
   })
 
   it('should not allow the input value to exceed maxAmount', () => {
-    const { getByRole } = render(
-      <QuantitySelector
-        currentAmount={1}
-        maxAmount={MAX_AMOUNT}
-        handleAmountChange={handleInputChangeMock}
-      />
-    )
+    const input = screen.getByRole('spinbutton') as HTMLInputElement
 
-    const input = getByRole('spinbutton') as HTMLInputElement
+    fireEvent.change(input, { target: { value: '12' } })
 
-    fireEvent.change(input, { target: { value: '6' } })
-
-    expect(handleInputChangeMock).toHaveBeenCalledTimes(1)
-    expect(parseInt(input.value)).toBe(MAX_AMOUNT)
+    expect(mockHandleAmountChange).toHaveBeenCalledTimes(1)
+    expect(parseInt(input.value)).toBe(10)
   })
 })

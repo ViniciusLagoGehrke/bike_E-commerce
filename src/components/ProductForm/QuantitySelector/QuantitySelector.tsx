@@ -1,43 +1,67 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-type DropdownProps = {
-  currentAmount: number
-  maxAmount: number | undefined
+type SelectorProps = {
+  min?: number
+  max?: number
+  step?: number
+  defaultValue: number
   handleAmountChange: (newAmount: number) => void
 }
 
 function QuantitySelector({
-  currentAmount = 1,
-  maxAmount = 1,
+  min = 1,
+  max = 10,
+  step = 1,
+  defaultValue = 1,
   handleAmountChange
-}: DropdownProps) {
-  const [value, setValue] = useState(currentAmount)
+}: SelectorProps) {
+  const [value, setValue] = useState(defaultValue)
 
-  useEffect(() => {
-    setValue(currentAmount)
-  }, [currentAmount])
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
-    const selectedQuantity = value <= maxAmount ? value : maxAmount
+    setValue(value)
+    handleAmountChange(value)
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(event.target.value)
+    const selectedQuantity = value <= max ? value : max
     setValue(selectedQuantity)
     handleAmountChange(selectedQuantity)
   }
+
   return (
-    <div className="mb-2 flex flex-col pl-2">
-      <label htmlFor="quantity" />
+    <div className="mb-2 flex gap-2 pl-4">
+      <div className="flex flex-col text-sm">
+        <label className="text-slate-500" htmlFor="quantity-slider">
+          Amount
+        </label>
+        <input
+          className="relative w-24"
+          type="range"
+          id="quantity-slider"
+          name="quantity-slider"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={handleSliderChange}
+        />
+      </div>
+      <label htmlFor="quantity-input" />
       <input
         className="h-10 w-16 rounded-md border border-slate-300 bg-white p-2 text-sm shadow-sm placeholder:text-slate-400 invalid:border-pink-500
               invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1
               focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         type="number"
-        id="quantity"
-        name="quantity"
-        min={1}
-        max={maxAmount}
+        id="quantity-input"
+        name="quantity-input"
+        min={min}
+        max={max}
+        step={step}
         value={value}
         onFocus={(e) => e.target.select()}
-        onChange={handleChange}
+        onChange={handleInputChange}
       />
     </div>
   )

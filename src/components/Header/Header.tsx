@@ -1,4 +1,4 @@
-import { ShoppingCartIcon } from '../../assets/ShoppingCart'
+import { CartIcon } from '../../assets/CartIcon'
 import { useShoppingCart } from '../../store/ShoppingCart'
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
         <div>
           <h3 className="font-bold">Total: ${state.total.toFixed(2)}</h3>
         </div>
-        <div>{ShoppingCartIcon}</div>
+        <div>{CartIcon}</div>
       </aside>
     </header>
   )

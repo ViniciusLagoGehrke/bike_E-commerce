@@ -1,4 +1,4 @@
-export const ShoppingCartIcon = (
+export const CartIcon = (
   <svg
     width="2rem"
     height="2rem"
