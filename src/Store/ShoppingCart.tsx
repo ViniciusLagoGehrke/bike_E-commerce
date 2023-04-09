@@ -22,17 +22,21 @@ export const useShoppingCart = () => {
   return context
 }
 
-type Props = {
+type ProviderProps = {
+  mockValue?: ShoppingCartContextType
   children: React.ReactNode
 }
 
-export const ShoppingCartProvider = ({ children }: Props) => {
+export const ShoppingCartProvider = ({
+  mockValue,
+  children
+}: ProviderProps) => {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
   const value = { state, dispatch }
 
   return (
-    <ShoppingCartContext.Provider value={value}>
+    <ShoppingCartContext.Provider value={mockValue ?? value}>
       {children}
     </ShoppingCartContext.Provider>
   )

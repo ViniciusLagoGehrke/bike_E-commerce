@@ -1,81 +1,72 @@
-import { render } from '@testing-library/react'
+import { vi } from 'vitest'
+import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from './Cart'
-import CartItem from './CartItem'
-import { CartItemType } from '../../types'
+import { ShoppingCartProvider } from '../../Store/ShoppingCart'
 
 describe('Cart', () => {
-  const items: CartItemType[] = [
+  const mockItems = [
     {
       id: '1',
       productName: 'Product 1',
-      price: 10,
-      taxRate: 0.2,
+      price: 10.0,
+      taxRate: 0.05,
+      maxAmount: 2,
       quantity: 2
     },
     {
       id: '2',
       productName: 'Product 2',
-      price: 5,
+      price: 20.0,
       taxRate: 0.1,
-      quantity: 3
+      maxAmount: 2,
+      quantity: 1
     }
   ]
 
-  it('renders the component with the correct props', () => {
-    const { getByText } = render(<Cart isCartClosed={false} items={items} />)
-
-    const product1Name = getByText('Product 1')
-    const product1Price = getByText('$10')
-    const product1Quantity = getByText('2')
-    const product1Amount = getByText('$20')
-    const product2Name = getByText('Product 2')
-    const product2Price = getByText('$5')
-    const product2Quantity = getByText('3')
-    const product2Amount = getByText('$15')
-
-    expect(product1Name).toBeInTheDocument()
-    expect(product1Price).toBeInTheDocument()
-    expect(product1Quantity).toBeInTheDocument()
-    expect(product1Amount).toBeInTheDocument()
-    expect(product2Name).toBeInTheDocument()
-    expect(product2Price).toBeInTheDocument()
-    expect(product2Quantity).toBeInTheDocument()
-    expect(product2Amount).toBeInTheDocument()
-  })
-})
-
-describe('CartItem', () => {
-  const product: CartItemType = {
-    id: '1',
-    productName: 'Product 1',
-    price: 10,
-    taxRate: 0.2,
-    quantity: 2
+  const mockState = {
+    cartItems: mockItems,
+    total: 40,
+    maxProductsReached: false,
+    MAX_ITEMS: 10,
+    isCartClosed: true,
+    message: null
   }
 
-  it('renders the component with the correct props', () => {
-    const { getByText } = render(
-      <table>
-        <tbody>
-          <CartItem
-            id={product.id}
-            productName={product.productName}
-            price={product.price}
-            taxRate={product.taxRate}
-            quantity={product.quantity}
-          />
-        </tbody>
-      </table>
+  const mockDispatch = vi.fn()
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    render(
+      <ShoppingCartProvider
+        mockValue={{ state: mockState, dispatch: mockDispatch }}
+      >
+        <Cart />
+      </ShoppingCartProvider>
     )
+  })
 
-    const productName = getByText('Product 1')
-    const price = getByText('$10')
-    const productQuantity = getByText('2')
-    const amount = getByText('$20')
+  it('renders Cart component', () => {
+    expect(screen.getByRole('table')).toBeInTheDocument()
+  })
 
-    expect(productName).toBeInTheDocument()
-    expect(price).toBeInTheDocument()
-    expect(productQuantity).toBeInTheDocument()
-    expect(amount).toBeInTheDocument()
+  it('displays items in the cart', () => {
+    expect(screen.getAllByTestId('cart-item')).toHaveLength(mockItems.length)
+  })
+
+  it('clears cart when Clear Cart button is clicked', () => {
+    const clearCartButton = screen.getByText('Clear Cart')
+    fireEvent.click(clearCartButton)
+
+    expect(mockDispatch).toHaveBeenCalledTimes(1)
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'CLEAR_CART' })
+  })
+
+  it('alerts purchase confirmation when Buy button is clicked', () => {
+    const buyButton = screen.getByText('Buy!')
+    fireEvent.click(buyButton)
+
+    expect(window.alert).toHaveBeenCalledWith('Purchase Confirmed!')
+    expect(mockDispatch).toHaveBeenCalledTimes(1)
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'CLEAR_CART' })
   })
 })

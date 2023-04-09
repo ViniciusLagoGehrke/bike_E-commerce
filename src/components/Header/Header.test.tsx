@@ -1,28 +1,77 @@
 import { vi } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
+import { ShoppingCartProvider } from '../../Store/ShoppingCart'
 import Header from './Header'
 
 describe('Header', () => {
-  it('renders the correct text and total amount', () => {
-    const toggleMock = vi.fn()
-    const { getByText } = render(
-      <Header toggle={toggleMock} totalAmount={50} />
-    )
+  const mockItems = [
+    {
+      id: '1',
+      productName: 'Product 1',
+      price: 10.0,
+      taxRate: 0.05,
+      maxAmount: 2,
+      quantity: 2
+    },
+    {
+      id: '2',
+      productName: 'Product 2',
+      price: 20.0,
+      taxRate: 0.1,
+      maxAmount: 2,
+      quantity: 1
+    }
+  ]
 
-    const shopTitle = getByText('Your Shop!')
-    const totalAmount = getByText('Total: $50')
+  const mockState = {
+    cartItems: mockItems,
+    total: 50,
+    maxProductsReached: false,
+    MAX_ITEMS: 10,
+    isCartClosed: true
+  }
+
+  const mockDispatch = vi.fn()
+
+  beforeEach(() => {
+    vi.clearAllMocks()
+    render(
+      <ShoppingCartProvider
+        mockValue={{ state: mockState, dispatch: mockDispatch }}
+      >
+        <Header />
+      </ShoppingCartProvider>
+    )
+  })
+
+  it('should render the header', () => {
+    expect(screen.getByText('Your Shop!')).toBeInTheDocument()
+    expect(
+      screen.getByText(`Total: $${mockState.total.toFixed(2)}`)
+    ).toBeInTheDocument()
+    expect(screen.getByTestId('shopping-cart-toggle')).toBeInTheDocument()
+  })
+
+  it('renders the correct text and total amount', () => {
+    const shopTitle = screen.getByText('Your Shop!')
+    const totalAmount = screen.getByText(new RegExp('50', 'i'))
 
     expect(shopTitle).toBeInTheDocument()
     expect(totalAmount).toBeInTheDocument()
   })
 
-  it('calls the toggle function when clicked', () => {
-    const toggleMock = vi.fn()
-    const { getByTestId } = render(
-      <Header toggle={toggleMock} totalAmount={0} />
-    )
-    const cartIcon = getByTestId('shopping-cart-toggle')
-    cartIcon.click()
-    expect(toggleMock).toHaveBeenCalled()
+  it('should open the cart when it is closed and the shopping cart button is clicked', () => {
+    fireEvent.click(screen.getByTestId('shopping-cart-toggle'))
+
+    expect(mockDispatch).toHaveBeenCalledTimes(1)
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'OPEN_CART' })
+  })
+
+  it('should close the cart when it is open and the shopping cart button is clicked', () => {
+    mockState.isCartClosed = false
+
+    fireEvent.click(screen.getByTestId('shopping-cart-toggle'))
+    expect(mockDispatch).toHaveBeenCalledTimes(1)
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'CLOSE_CART' })
   })
 })

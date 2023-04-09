@@ -1,70 +1,121 @@
 import { vi } from 'vitest'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, screen } from '@testing-library/react'
+import { ShoppingCartProvider } from '../../Store/ShoppingCart'
 import ProductForm from './ProductForm'
-import { ProductType } from '../../types'
 
-const products: ProductType[] = [
-  {
-    id: '1',
-    productName: 'Product 1',
-    maxAmount: 10,
-    taxRate: 1,
-    price: 1.99
-  },
-  {
-    id: '2',
-    productName: 'Product 2',
-    maxAmount: 5,
-    taxRate: 1,
-    price: 5.99
+describe('ProductForm', () => {
+  const products = [
+    {
+      id: '1',
+      productName: 'Product 1',
+      price: 10,
+      maxAmount: 5,
+      taxRate: 0.05
+    },
+    {
+      id: '2',
+      productName: 'Product 2',
+      price: 20,
+      maxAmount: 10,
+      taxRate: 0.1
+    }
+  ]
+
+  const mockItems = [
+    {
+      id: '1',
+      productName: 'Product 1',
+      price: 10.0,
+      taxRate: 0.05,
+      maxAmount: 2,
+      quantity: 2
+    },
+    {
+      id: '2',
+      productName: 'Product 2',
+      price: 20.0,
+      taxRate: 0.1,
+      maxAmount: 2,
+      quantity: 1
+    }
+  ]
+
+  const mockState = {
+    cartItems: mockItems,
+    total: 40,
+    maxProductsReached: false,
+    MAX_ITEMS: 10,
+    isCartClosed: true
   }
-]
 
-describe('ProductForm component', () => {
-  it('renders ProductList, QuantitySelector, Button, and selected product info', () => {
-    const { getByRole } = render(<ProductForm products={products} />)
+  const mockDispatch = vi.fn()
 
-    const productList = getByRole('menu')
-    expect(productList).toBeInTheDocument()
-
-    const quantitySelector = getByRole('spinbutton') as HTMLInputElement
-    expect(quantitySelector).toBeInTheDocument()
-
-    const button = getByRole('button', { name: /add to cart/i })
-    expect(button).toBeInTheDocument()
+  beforeEach(() => {
+    vi.clearAllMocks()
+    render(
+      <ShoppingCartProvider
+        mockValue={{ state: mockState, dispatch: mockDispatch }}
+      >
+        <ProductForm products={products} />
+      </ShoppingCartProvider>
+    )
   })
 
-  it('calls handleAddToCart when form is submitted', () => {
-    const handleAddToCart = vi.fn()
+  it('renders product options', () => {
+    const productSelect = screen.getByRole('menu')
 
-    const { getByTestId } = render(<ProductForm products={products} />)
-
-    const form = getByTestId('product-form')
-    fireEvent.submit(form)
-
-    expect(handleAddToCart).toHaveBeenCalled()
+    expect(productSelect).toBeInTheDocument()
+    expect(productSelect).toHaveDisplayValue(['Select a Product'])
   })
 
-  it('calls handleChange when product selection changes', () => {
-    const handleChange = vi.fn()
+  it('updates selected product on change', () => {
+    const productSelect = screen.getByRole('menu')
 
-    const { getByRole } = render(<ProductForm products={products} />)
+    fireEvent.change(productSelect, { target: { value: '2' } })
 
-    const dropdown = getByRole('menu')
-    fireEvent.change(dropdown, { target: { value: '2' } })
-
-    expect(handleChange).toHaveBeenCalledWith(expect.any(Object))
+    expect(productSelect).toHaveValue('2')
   })
 
-  it('calls handleAmountChange when quantity selection changes', () => {
-    const handleAmountChange = vi.fn()
+  it('updates selected quantity on change', () => {
+    const productSelect = screen.getByRole('menu')
+    fireEvent.change(productSelect, { target: { value: '2' } })
 
-    const { getByRole } = render(<ProductForm products={products} />)
-    const quantitySelect = getByRole('spinbutton') as HTMLInputElement
+    const quantityInput = screen.getByRole('spinbutton') as HTMLInputElement
+    fireEvent.change(quantityInput, { target: { value: '2' } })
 
-    fireEvent.change(quantitySelect, { target: { value: '2' } })
+    expect(quantityInput).toHaveValue(2)
+  })
 
-    expect(handleAmountChange).toHaveBeenCalledTimes(1)
-    expect(handleAmountChange).toHaveBeenCalledWith(2)
+  it('computes subtotal on product and quantity change', () => {
+    const productSelect = screen.getByRole('menu')
+    const quantityInput = screen.getByRole('spinbutton') as HTMLInputElement
+    const subtotal = screen.getByTestId('subtotal')
+
+    expect(subtotal).toBeInTheDocument()
+
+    fireEvent.change(productSelect, { target: { value: '2' } })
+    fireEvent.change(quantityInput, { target: { value: '3' } })
+
+    expect(subtotal).toHaveTextContent('60')
+  })
+
+  it('adds selected product to cart on submit', () => {
+    fireEvent.change(screen.getByRole('menu'), { target: { value: '1' } })
+    fireEvent.change(screen.getByRole('spinbutton'), { target: { value: '2' } })
+    fireEvent.submit(screen.getByTestId('product-form'))
+
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'ADD_ITEM',
+      payload: {
+        item: {
+          id: '1',
+          productName: 'Product 1',
+          price: 10,
+          maxAmount: 5,
+          taxRate: 0.05,
+          quantity: 2
+        }
+      }
+    })
   })
 })

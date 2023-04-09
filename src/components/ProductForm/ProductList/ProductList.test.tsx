@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import { render, fireEvent } from '@testing-library/react'
 import ProductList from './ProductList'
-import products from '../../../data/products.json'
+import products from '../../../../data/products.json'
 
 describe('ProductList', () => {
   it('renders a dropdown with product names', () => {

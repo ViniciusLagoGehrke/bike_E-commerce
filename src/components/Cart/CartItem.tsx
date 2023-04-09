@@ -19,7 +19,7 @@ function CartItem({
   // Todo
   console.log(taxRate)
   return (
-    <tr className="border-b last:border-none">
+    <tr data-testid="cart-item" className="border-b last:border-none">
       <td
         className="cursor-pointer text-center font-normal"
         onClick={handleItemRemove}

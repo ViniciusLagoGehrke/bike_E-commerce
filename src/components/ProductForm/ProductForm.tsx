@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import ProductList from '../ProductList'
-import QuantitySelector from '../QuantitySelector'
+import ProductList from './ProductList'
+import QuantitySelector from './QuantitySelector'
 import Button from '../Button'
 import { useShoppingCart } from '../../Store/ShoppingCart'
 import { ProductType, CartItemType } from '../../types'
@@ -62,7 +62,9 @@ function ProductForm({ products }: ProductFormPros) {
         <div className="mb-2 px-4">
           <p>
             x <span className="px-2">{selected?.price ?? 0}</span> ={' '}
-            <span className="px-2">{subtotal}</span>
+            <span data-testid="subtotal" className="px-2">
+              {subtotal}
+            </span>
           </p>
         </div>
       </div>
