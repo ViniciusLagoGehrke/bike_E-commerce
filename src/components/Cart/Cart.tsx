@@ -31,7 +31,7 @@ function Cart({ isCartClosed, items }: CartProps) {
     <aside
       className={`${
         isCartClosed ? 'hidden' : 'absolute'
-      } right-0 flex h-full w-full flex-col justify-between bg-pink-300 sm:w-80`}
+      } right-0 flex h-full w-full flex-col justify-between sm:w-80`}
     >
       {items ? (
         <table className="mx-auto mt-2 table w-full table-auto px-2 sm:text-base">

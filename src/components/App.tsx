@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import ProductList from './ProductList'
-import QuantitySelector from './QuantitySelector'
-import Button from './Button'
+import Header from './Header'
+import ProductForm from './ProductForm'
 import Cart from './Cart'
 import { ProductType } from '../types'
 import products from '../../data/products.json'
@@ -51,38 +50,20 @@ function App() {
   return (
     <div className="bg-white">
       <div className="mx-auto flex h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <div className="relative flex flex-auto">
-          <div className="flex flex-auto flex-col">
-            <header className="flex">
-              <h1 className="flex-auto bg-blue-300 px-2 pb-2 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Your Shop!
-              </h1>
-              <aside
-                className="flex items-center justify-around bg-blue-600 sm:w-80"
-                onClick={toggleCart}
-              >
-                <div>Cart</div>
-                <div>
-                  <h3 className="font-bold">Total: ${calculateTotal()}</h3>
-                </div>
-              </aside>
-            </header>
-            <div className="relative flex flex-auto">
-              <main className="flex-auto bg-green-300 py-2">
-                <form className="flex flex-wrap" onSubmit={handleAddToCart}>
-                  <ProductList list={products} handleChange={handleChange} />
-                  <QuantitySelector
-                    currentAmount={quantity}
-                    maxAmount={selected?.maxAmount}
-                    handleAmountChange={handleAmountChange}
-                  />
-                  {selected ? <p>{selected.productName}</p> : null}
-                  <p>{quantity}</p>
-                  <Button title="Add to Cart" />
-                </form>
-              </main>
-              <Cart isCartClosed={isCartClosed} items={cartItems} />
-            </div>
+        <div className="relative flex flex-auto flex-col">
+          <Header toggle={toggleCart} totalAmount={calculateTotal()} />
+          <div className="relative flex flex-auto">
+            <main className="flex-auto py-2">
+              <ProductForm
+                products={products}
+                quantity={quantity}
+                selected={selected}
+                handleAddToCart={handleAddToCart}
+                handleChange={handleChange}
+                handleAmountChange={handleAmountChange}
+              />
+            </main>
+            <Cart isCartClosed={isCartClosed} items={cartItems} />
           </div>
         </div>
         <footer className="flex h-14 items-center justify-center bg-orange-300">
