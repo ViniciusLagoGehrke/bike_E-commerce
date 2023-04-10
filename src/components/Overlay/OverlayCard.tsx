@@ -8,7 +8,7 @@ const Card: React.FC<OverlayProps> = ({ message, onClose }) => {
     <div
       data-testid="overlay-card"
       onClick={(e) => e.stopPropagation()}
-      className="z-20 flex flex-wrap rounded-md bg-white p-3 text-sm text-gray-700 shadow-lg"
+      className="z-20 flex h-24 flex-wrap rounded-md bg-white p-3 text-sm text-gray-700 shadow-lg"
     >
       <button
         data-testid="overlay-close-button"
@@ -28,7 +28,7 @@ const OverlayCard: React.FC<OverlayProps> = ({ message, onClose }) => {
   return (
     <div
       onClick={onClose}
-      className="absolute left-0 z-10 flex h-full w-full items-center justify-center bg-gray-800"
+      className="absolute left-0 z-10 flex h-full w-full items-center justify-center bg-gray-800/50"
     >
       <Card message={message} onClose={onClose} />
     </div>

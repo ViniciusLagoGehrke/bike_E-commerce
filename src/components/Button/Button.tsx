@@ -16,7 +16,7 @@ function Button({
   const styleClass =
     buttonStyle === 'primary'
       ? 'bg-indigo-600 hover:bg-indigo-700'
-      : 'bg-stone-600 hover:bg-stone-700'
+      : 'bg-slate-400 hover:bg-slate-500'
 
   return (
     <>
@@ -26,7 +26,7 @@ function Button({
         <button
           type={buttonType}
           onClick={onClick}
-          className={`${styleClass} ${className} flex h-10 items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm`}
+          className={`${styleClass} ${className} flex h-10  w-40 items-center justify-center rounded-md border border-transparent px-6 py-3 text-base font-medium text-white shadow-sm`}
         >
           {title}
         </button>

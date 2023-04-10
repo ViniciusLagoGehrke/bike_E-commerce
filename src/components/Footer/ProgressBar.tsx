@@ -7,6 +7,12 @@ export type ProgressBarProps = {
 function ProgressBar({ min, max, progress }: ProgressBarProps) {
   const remainingItems = max - progress
   const percentFilled = (progress / max) * 100
+  const textDescription =
+    percentFilled === 100
+      ? "You can't add more unique items"
+      : `You can add more ${remainingItems} unique ${
+          remainingItems === 1 ? 'item' : 'items'
+        }`
 
   return (
     <div className="flex w-3/4 flex-wrap items-center justify-center">
@@ -22,9 +28,7 @@ function ProgressBar({ min, max, progress }: ProgressBarProps) {
           style={{ width: `${percentFilled}%` }}
         />
       </div>
-      <p className="mt-2">
-        {remainingItems} {remainingItems === 1 ? 'type' : 'types'} left to add
-      </p>
+      <p className="mt-2 text-sm sm:text-base">{textDescription}</p>
     </div>
   )
 }

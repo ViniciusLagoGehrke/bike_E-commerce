@@ -15,7 +15,7 @@ function App() {
             <div className="relative flex flex-auto flex-col">
               <Header />
               <div className="relative flex flex-auto">
-                <main className="flex-auto py-2">
+                <main className="flex-auto py-2 sm:p-12">
                   <ProductForm products={products} />
                 </main>
                 <Cart />

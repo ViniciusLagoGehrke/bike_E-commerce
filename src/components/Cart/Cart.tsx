@@ -53,13 +53,18 @@ function Cart() {
           <tbody>{renderItems(state.cartItems)}</tbody>
         </table>
       </div>
-      <footer className="flex w-full justify-around py-2">
+      <footer className="flex w-full flex-wrap items-stretch justify-around gap-2 py-2 sm:gap-4">
         <Button
+          className="min-w-full text-base sm:h-12 sm:text-lg"
+          title="Buy!"
+          onClick={handlePurchase}
+        />
+        <Button
+          className="min-w-full"
           title="Clear Cart"
           buttonStyle="secondary"
           onClick={handleClearCart}
         />
-        <Button title="Buy!" onClick={handlePurchase} />
       </footer>
     </aside>
   )

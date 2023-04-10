@@ -49,10 +49,10 @@ function ProductForm({ products }: ProductFormPros) {
   return (
     <form
       data-testid="product-form"
-      className="flex flex-col"
+      className="flex flex-col gap-8 p-2"
       onSubmit={handleAddToCart}
     >
-      <div className="flex flex-wrap items-center">
+      <div className="flex flex-wrap items-center gap-4">
         <ProductList list={products} handleChange={handleProductSelection} />
         <QuantitySelector
           key={quantity}
@@ -60,20 +60,20 @@ function ProductForm({ products }: ProductFormPros) {
           defaultValue={quantity}
           handleAmountChange={handleAmountChange}
         />
-        <div className="mb-2 px-4">
+        <div className="pl-4">
           <p>
             x{' '}
-            <span data-testid="current-price" className="px-2">
+            <span data-testid="current-price" className="px-2 sm:px-4">
               {price}
             </span>{' '}
             ={' '}
-            <span data-testid="subtotal" className="px-2">
+            <span data-testid="subtotal" className="px-2 sm:px-4">
               {subtotal.toFixed(2)}
             </span>
           </p>
         </div>
       </div>
-      <Button className="ml-2 mb-2 w-40" title="Add to Cart" />
+      <Button className="" title="Add to Cart" />
     </form>
   )
 }
