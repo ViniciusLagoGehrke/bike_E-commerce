@@ -5,7 +5,7 @@ type OverlayProps = {
   children: React.ReactNode
 }
 
-const OverlayWrapper = ({ children }: OverlayProps) => {
+function OverlayWrapper({ children }: OverlayProps) {
   const { state, dispatch } = useShoppingCart()
 
   const handleClose = () => {

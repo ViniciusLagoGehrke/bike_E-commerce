@@ -49,20 +49,25 @@ function QuantitySelector({
         />
       </div>
       <label htmlFor="quantity-input" />
-      <input
-        className="h-10 w-10 rounded-md border border-slate-300 bg-white p-2 text-center text-sm shadow-sm placeholder:text-slate-400 invalid:border-pink-500
+      <div className="relative">
+        <input
+          className="h-10 w-10 rounded-md border border-slate-300 bg-white p-2 text-center text-sm shadow-sm placeholder:text-slate-400 invalid:border-pink-500
               invalid:text-pink-600 focus:border-sky-500 focus:outline-none focus:ring-1
               focus:ring-sky-500 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-        type="number"
-        id="quantity-input"
-        name="quantity-input"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onFocus={(e) => e.target.select()}
-        onChange={handleInputChange}
-      />
+          type="number"
+          id="quantity-input"
+          name="quantity-input"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onFocus={(e) => e.target.select()}
+          onChange={handleInputChange}
+        />
+        <span className="absolute inline-block w-24 translate-y-10 -translate-x-1/2 text-red-600">
+          {value > max ? `Max of ${max}` : ''}
+        </span>
+      </div>
     </div>
   )
 }

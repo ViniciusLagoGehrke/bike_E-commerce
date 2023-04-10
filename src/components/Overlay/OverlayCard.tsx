@@ -3,7 +3,7 @@ type OverlayProps = {
   onClose: () => void
 }
 
-const Card: React.FC<OverlayProps> = ({ message, onClose }) => {
+function Card({ message, onClose }: OverlayProps) {
   return (
     <div
       data-testid="overlay-card"
@@ -24,7 +24,7 @@ const Card: React.FC<OverlayProps> = ({ message, onClose }) => {
   )
 }
 
-const OverlayCard: React.FC<OverlayProps> = ({ message, onClose }) => {
+function OverlayCard({ message, onClose }: OverlayProps) {
   return (
     <div
       onClick={onClose}

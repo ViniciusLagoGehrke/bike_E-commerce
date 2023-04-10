@@ -23,7 +23,7 @@ function CartItem({ index, productName, price, quantity }: CartItemProps) {
       <td className="font-normal">{productName}</td>
       <td className="font-normal">${price}</td>
       <td className="font-normal">{quantity}</td>
-      <td className="font-normal">${price * quantity}</td>
+      <td className="font-normal">${(price * quantity).toFixed(2)}</td>
     </tr>
   )
 }

@@ -49,10 +49,10 @@ function ProductForm({ products }: ProductFormPros) {
   return (
     <form
       data-testid="product-form"
-      className="flex flex-col gap-8 p-2"
+      className="flex flex-wrap justify-center gap-8"
       onSubmit={handleAddToCart}
     >
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-wrap items-center justify-center gap-4">
         <ProductList list={products} handleChange={handleProductSelection} />
         <QuantitySelector
           key={quantity}
@@ -60,7 +60,7 @@ function ProductForm({ products }: ProductFormPros) {
           defaultValue={quantity}
           handleAmountChange={handleAmountChange}
         />
-        <div className="pl-4">
+        <div className="pl-2">
           <p>
             x{' '}
             <span data-testid="current-price" className="px-2 sm:px-4">
