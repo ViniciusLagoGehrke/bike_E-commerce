@@ -107,5 +107,5 @@ pnpm run test:ui
 
 I deployed this project in Vercel where you can Log in with GitHub, GitLab, Bitbucket, or email to deploy websites for free with zero configuration, automatic SSL, and global CDN.
 
-You can check it live here: [Bike E-Commerce]()
+You can check it live here: [Bike E-Commerce](https://bike-e-commerce-1pj4vefil-viniciuslagogehrke.vercel.app/)
 
