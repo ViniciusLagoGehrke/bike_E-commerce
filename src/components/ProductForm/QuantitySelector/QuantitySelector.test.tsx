@@ -22,11 +22,9 @@ describe('QuantitySelector', () => {
     expect(screen.getByLabelText(/Amount/)).toBeInTheDocument()
     expect(slider).toHaveAttribute('min', '1')
     expect(slider).toHaveAttribute('max', '10')
-    expect(slider).toHaveAttribute('step', '1')
     expect(slider).toHaveAttribute('defaultvalue', '1')
     expect(input).toHaveAttribute('min', '1')
     expect(input).toHaveAttribute('max', '10')
-    expect(input).toHaveAttribute('step', '1')
     expect(input).toHaveAttribute('defaultvalue', '1')
   })
 

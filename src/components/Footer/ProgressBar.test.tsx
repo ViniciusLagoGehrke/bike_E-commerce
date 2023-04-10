@@ -11,7 +11,7 @@ describe('ProgressBar', () => {
   it('displays the remaining types and progress bar', () => {
     const { getByText, getByRole } = render(<ProgressBar {...props} />)
 
-    const text = getByText('5 types left to add')
+    const text = getByText('You can add more 5 unique items')
     const progressbar = getByRole('progressbar')
 
     expect(text).toBeInTheDocument()
@@ -26,7 +26,7 @@ describe('ProgressBar', () => {
       progress: 9
     }
     const { getByText } = render(<ProgressBar {...singularProps} />)
-    const text = getByText('1 type left to add')
+    const text = getByText('You can add more 1 unique item')
 
     expect(text).toBeInTheDocument()
   })
@@ -38,7 +38,19 @@ describe('ProgressBar', () => {
       progress: 8
     }
     const { getByText } = render(<ProgressBar {...pluralProps} />)
-    const text = getByText('2 types left to add')
+    const text = getByText('You can add more 2 unique items')
+
+    expect(text).toBeInTheDocument()
+  })
+
+  it('displays text when no more product type can be adde to cart', () => {
+    const pluralProps: ProgressBarProps = {
+      min: 0,
+      max: 10,
+      progress: 10
+    }
+    const { getByText } = render(<ProgressBar {...pluralProps} />)
+    const text = getByText("You can't add more unique items")
 
     expect(text).toBeInTheDocument()
   })

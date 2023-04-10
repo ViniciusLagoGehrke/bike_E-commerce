@@ -58,7 +58,6 @@ describe('Cart', () => {
   })
 
   it('should remove the correct item when its delete button is clicked', () => {
-    // const items = screen.getAllByTestId('cart-item')
     const deleteButton = screen.getAllByTestId('delete-item-button')
     const firstDeleteButton = deleteButton[0]
 

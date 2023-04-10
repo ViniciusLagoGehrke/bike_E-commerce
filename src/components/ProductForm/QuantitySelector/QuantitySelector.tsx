@@ -11,19 +11,12 @@ type SelectorProps = {
 function QuantitySelector({
   min = 1,
   max = 10,
-  step = 1,
   defaultValue = 1,
   handleAmountChange
 }: SelectorProps) {
   const [value, setValue] = useState(defaultValue)
 
-  const handleSliderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value)
-    setValue(value)
-    handleAmountChange(value)
-  }
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value)
     const selectedQuantity = value <= max ? value : max
     setValue(selectedQuantity)
@@ -43,9 +36,8 @@ function QuantitySelector({
           name="quantity-slider"
           min={min}
           max={max}
-          step={step}
           value={value}
-          onChange={handleSliderChange}
+          onChange={handleChange}
         />
       </div>
       <label htmlFor="quantity-input" />
@@ -59,10 +51,9 @@ function QuantitySelector({
           name="quantity-input"
           min={min}
           max={max}
-          step={step}
           value={value}
           onFocus={(e) => e.target.select()}
-          onChange={handleInputChange}
+          onChange={handleChange}
         />
         <span className="absolute inline-block w-24 translate-y-10 -translate-x-1/2 text-red-600">
           {value > max ? `Max of ${max}` : ''}

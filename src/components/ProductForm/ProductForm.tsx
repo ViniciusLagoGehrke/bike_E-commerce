@@ -55,7 +55,6 @@ function ProductForm({ products }: ProductFormPros) {
       <div className="flex flex-wrap items-center justify-center gap-4">
         <ProductList list={products} handleChange={handleProductSelection} />
         <QuantitySelector
-          key={quantity}
           max={maxAmount}
           defaultValue={quantity}
           handleAmountChange={handleAmountChange}
@@ -63,11 +62,17 @@ function ProductForm({ products }: ProductFormPros) {
         <div className="pl-2">
           <p>
             x{' '}
-            <span data-testid="current-price" className="px-2 sm:px-4">
+            <span
+              data-testid="current-price"
+              className="inline-block w-20 px-2 text-center sm:px-4"
+            >
               {price}
             </span>{' '}
             ={' '}
-            <span data-testid="subtotal" className="px-2 sm:px-4">
+            <span
+              data-testid="subtotal"
+              className="inline-block w-24 px-2 text-center sm:px-4"
+            >
               {subtotal.toFixed(2)}
             </span>
           </p>

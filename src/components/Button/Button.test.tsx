@@ -21,7 +21,7 @@ describe('Button', () => {
     )
     const button = getByRole('button')
 
-    expect(button).toHaveClass('bg-stone-600')
+    expect(button).toHaveClass('bg-slate-400')
   })
 
   it('renders as a link when buttonType is set to "link"', () => {

@@ -28,7 +28,7 @@
 
 [x] It is not allowed to add a quantity of items to the shopping cart that exceeds the "**maxAmount**" of the respective product.
 
-[ ] As a customer I want to be able to select the quantity of products with a slider
+[x] As a customer I want to be able to select the quantity of products with a slider
 
 ## What is inside?
 
