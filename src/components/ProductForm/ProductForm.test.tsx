@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import { render, fireEvent, screen } from '@testing-library/react'
-import { ShoppingCartProvider } from '../../store/ShoppingCart'
+import { ShoppingCartProvider } from '../../cartStore/ShoppingCart'
 import ProductForm from './ProductForm'
 
 describe('ProductForm', () => {

@@ -1,7 +1,7 @@
 import { CartItemType } from '../../types'
 import CartItem from './CartItem'
 import Button from '../Button'
-import { useShoppingCart } from '../../store/ShoppingCart'
+import { useShoppingCart } from '../../cartStore/ShoppingCart'
 
 type itemsProp = Omit<CartItemType, 'index'>[]
 

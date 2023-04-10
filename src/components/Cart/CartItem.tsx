@@ -1,5 +1,5 @@
 import { TrashIcon } from '../../assets/TrashIcon'
-import { useShoppingCart } from '../../store/ShoppingCart'
+import { useShoppingCart } from '../../cartStore/ShoppingCart'
 import { CartItemType } from '../../types'
 
 type CartItemProps = Omit<CartItemType, 'maxAmount'>

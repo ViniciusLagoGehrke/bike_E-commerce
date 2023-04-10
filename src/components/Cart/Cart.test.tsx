@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from './Cart'
-import { ShoppingCartProvider } from '../../store/ShoppingCart'
+import { ShoppingCartProvider } from '../../cartStore/ShoppingCart'
 
 describe('Cart', () => {
   const mockItems = [

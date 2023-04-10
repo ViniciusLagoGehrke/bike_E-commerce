@@ -1,4 +1,4 @@
-import { ShoppingCartProvider } from '../store/ShoppingCart'
+import { ShoppingCartProvider } from '../cartStore/ShoppingCart'
 import OverlayWrapper from './Overlay'
 import Header from './Header'
 import ProductForm from './ProductForm'

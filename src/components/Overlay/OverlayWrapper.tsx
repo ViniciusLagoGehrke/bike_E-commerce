@@ -1,4 +1,4 @@
-import { useShoppingCart } from '../../store/ShoppingCart'
+import { useShoppingCart } from '../../cartStore/ShoppingCart'
 import OverlayCard from './OverlayCard'
 
 type OverlayProps = {
