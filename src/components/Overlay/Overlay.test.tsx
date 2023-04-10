@@ -2,6 +2,7 @@ import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { ShoppingCartProvider } from '../../store/ShoppingCart'
 import OverlayWrapper from './OverlayWrapper'
+import { State } from 'store/reducer'
 
 describe('OverlayWrapper', () => {
   const MockMessage = 'TESTING'
@@ -25,7 +26,7 @@ describe('OverlayWrapper', () => {
     }
   ]
 
-  const mockState = {
+  const mockState: State = {
     cartItems: mockItems,
     total: 40,
     maxProductsReached: false,
@@ -50,7 +51,7 @@ describe('OverlayWrapper', () => {
   })
 
   it('renders children when there is no message', () => {
-    mockState.message = ''
+    mockState.message = null
 
     const childElement = screen.getByText('child')
 
@@ -67,11 +68,11 @@ describe('OverlayWrapper', () => {
     expect(childElement).toBeNull()
   })
 
-  it('calls dispatch with RESET action when OverlayCard is closed', () => {
+  it('calls dispatch with CLEAR_MESSAGE action when OverlayCard is closed', () => {
     const closeButton = screen.getByTestId('overlay-close-button')
 
     fireEvent.click(closeButton)
 
-    expect(mockDispatch).toHaveBeenCalledWith({ type: 'RESET' })
+    expect(mockDispatch).toHaveBeenCalledWith({ type: 'CLEAR_MESSAGE' })
   })
 })

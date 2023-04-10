@@ -16,7 +16,7 @@ export type Action =
   | { type: 'OPEN_CART' }
   | { type: 'CLOSE_CART' }
   | { type: 'PURCHASE' }
-  | { type: 'RESET' }
+  | { type: 'CLEAR_MESSAGE' }
 
 const MAX_ITEMS = 10
 
@@ -33,6 +33,9 @@ const cartReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_ITEM': {
       const { item } = action.payload
+
+      if (!item || !item.id) return state
+
       const existingItemIndex = state.cartItems.findIndex(
         (cartItem) => cartItem.id === item.id
       )
@@ -41,13 +44,33 @@ const cartReducer = (state: State, action: Action): State => {
         const existingItem = state.cartItems[existingItemIndex]
 
         if (existingItem.quantity + item.quantity > existingItem.maxAmount) {
-          return { ...state }
+          const itemUptoMax = {
+            ...existingItem,
+            quantity: existingItem.maxAmount
+          }
+
+          const updatedTotal =
+            state.total -
+            existingItem.price * existingItem.quantity +
+            itemUptoMax.price * itemUptoMax.quantity
+          const quantityMessage = itemUptoMax.quantity > 1 ? 's' : ''
+
+          const updatedCartItems = [...state.cartItems]
+          updatedCartItems[existingItemIndex] = itemUptoMax
+
+          return {
+            ...state,
+            cartItems: updatedCartItems,
+            total: updatedTotal,
+            message: `It was added up to this item's maximum of ${itemUptoMax.quantity} unit${quantityMessage}.`
+          }
         }
 
         const updatedItem = {
           ...existingItem,
           quantity: existingItem.quantity + item.quantity
         }
+
         const updatedCartItems = [...state.cartItems]
         updatedCartItems[existingItemIndex] = updatedItem
 
@@ -111,11 +134,16 @@ const cartReducer = (state: State, action: Action): State => {
     case 'CLOSE_CART':
       return { ...state, isCartClosed: true }
 
-    case 'PURCHASE':
-      return { ...initialState, message: 'Purchase Confirmed!' }
+    case 'PURCHASE': {
+      if (state.cartItems.length === 0) {
+        return { ...state, message: 'Please add products to your cart' }
+      }
 
-    case 'RESET':
-      return { ...initialState }
+      return { ...initialState, message: 'Purchase Confirmed!' }
+    }
+
+    case 'CLEAR_MESSAGE':
+      return { ...state, message: null }
 
     default:
       return state

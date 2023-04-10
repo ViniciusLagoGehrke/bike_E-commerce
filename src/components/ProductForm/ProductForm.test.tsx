@@ -45,7 +45,8 @@ describe('ProductForm', () => {
     total: 40,
     maxProductsReached: false,
     MAX_ITEMS: 10,
-    isCartClosed: true
+    isCartClosed: true,
+    message: null
   }
 
   const mockDispatch = vi.fn()
@@ -84,6 +85,18 @@ describe('ProductForm', () => {
     fireEvent.change(quantityInput, { target: { value: '2' } })
 
     expect(quantityInput).toHaveValue(2)
+  })
+
+  it('display zero or the price of the current selected product', () => {
+    const productSelect = screen.getByRole('menu')
+    const displayedPrice = screen.getByTestId('current-price')
+
+    expect(displayedPrice).toBeInTheDocument()
+    expect(displayedPrice).toHaveTextContent('0')
+
+    fireEvent.change(productSelect, { target: { value: '2' } })
+
+    expect(displayedPrice).toHaveTextContent('20')
   })
 
   it('computes subtotal on product and quantity change', () => {

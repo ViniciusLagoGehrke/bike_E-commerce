@@ -44,7 +44,6 @@ function ProductForm({ products }: ProductFormPros) {
   const handleAddToCart: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
     dispatch({ type: 'ADD_ITEM', payload: { item: selected } })
-    setSelected(initialState)
   }
 
   return (
@@ -63,7 +62,11 @@ function ProductForm({ products }: ProductFormPros) {
         />
         <div className="mb-2 px-4">
           <p>
-            x <span className="px-2">{price ?? 0}</span> ={' '}
+            x{' '}
+            <span data-testid="current-price" className="px-2">
+              {price}
+            </span>{' '}
+            ={' '}
             <span data-testid="subtotal" className="px-2">
               {subtotal.toFixed(2)}
             </span>

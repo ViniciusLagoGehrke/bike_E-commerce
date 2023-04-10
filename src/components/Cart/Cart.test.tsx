@@ -49,8 +49,26 @@ describe('Cart', () => {
     expect(screen.getByRole('table')).toBeInTheDocument()
   })
 
+  it('should not display the cart when it is closed', () => {
+    expect(screen.getByRole('complementary')).toHaveClass('hidden')
+  })
+
   it('displays items in the cart', () => {
     expect(screen.getAllByTestId('cart-item')).toHaveLength(mockItems.length)
+  })
+
+  it('should remove the correct item when its delete button is clicked', () => {
+    // const items = screen.getAllByTestId('cart-item')
+    const deleteButton = screen.getAllByTestId('delete-item-button')
+    const firstDeleteButton = deleteButton[0]
+
+    fireEvent.click(firstDeleteButton)
+
+    expect(mockDispatch).toHaveBeenCalledTimes(1)
+    expect(mockDispatch).toHaveBeenCalledWith({
+      type: 'REMOVE_ITEM',
+      payload: { index: 0 as number }
+    })
   })
 
   it('clears cart when Clear Cart button is clicked', () => {

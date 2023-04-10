@@ -50,7 +50,7 @@ function Cart() {
               <th className="text-left font-medium">Price</th>
             </tr>
           </thead>
-          <tbody>{state.cartItems ? renderItems(state.cartItems) : null}</tbody>
+          <tbody>{renderItems(state.cartItems)}</tbody>
         </table>
       </div>
       <footer className="flex w-full justify-around py-2">

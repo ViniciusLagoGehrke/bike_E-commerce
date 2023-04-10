@@ -9,7 +9,7 @@ const OverlayWrapper = ({ children }: OverlayProps) => {
   const { state, dispatch } = useShoppingCart()
 
   const handleClose = () => {
-    dispatch({ type: 'RESET' })
+    dispatch({ type: 'CLEAR_MESSAGE' })
   }
 
   return (

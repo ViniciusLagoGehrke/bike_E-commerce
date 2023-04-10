@@ -14,6 +14,7 @@ function CartItem({ index, productName, price, quantity }: CartItemProps) {
   return (
     <tr data-testid="cart-item" className="border-b last:border-none">
       <td
+        data-testid="delete-item-button"
         className="cursor-pointer text-center font-normal"
         onClick={handleItemRemove}
       >
