@@ -4,13 +4,13 @@
 
 ## What does it do?
 
-[x] As a customer I want to be able to select products from the drop down list.
+- [x] As a customer I want to be able to select products from the drop down list.
 
-[x] As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
+-[x] As a customer I would like to be able to determine the quantity of the product before I add it to the shopping cart.
 
-[x] As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
+ - [x] As a customer I would like to be informed when I exceed the maximum number of products and be prevented from entering more than this number
 
-[x] As a customer I want to be able to see all my products in the shopping cart
+ -[x] As a customer I want to be able to see all my products in the shopping cart
 
 [x] As a customer I want to be able to see the unit price in my shopping cart.
 
