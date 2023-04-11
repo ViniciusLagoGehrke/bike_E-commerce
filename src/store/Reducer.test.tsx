@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { renderHook, act } from '@testing-library/react'
-import cartReducer, { initialState } from './Reducer'
+import cartReducer, { initialState, getGrossTotalOf } from './Reducer'
 
 describe('cartReducer', () => {
   const initialResult = {
@@ -32,7 +32,7 @@ describe('cartReducer', () => {
     expect(result.current[0]).toEqual({
       ...initialResult,
       cartItems: [item],
-      total: 10
+      total: getGrossTotalOf(item)
     })
   })
 
@@ -40,6 +40,16 @@ describe('cartReducer', () => {
     const item2 = {
       ...item,
       quantity: 2
+    }
+
+    const resultItem = {
+      id: '1',
+      productName: 'Product 1',
+      price: 10,
+      maxAmount: 5,
+      taxRate: 0.21,
+      quantity: 3,
+      index: 0
     }
 
     const { result } = renderHook(() =>
@@ -52,18 +62,8 @@ describe('cartReducer', () => {
 
     expect(result.current[0]).toEqual({
       ...initialResult,
-      cartItems: [
-        {
-          id: '1',
-          productName: 'Product 1',
-          price: 10,
-          maxAmount: 5,
-          taxRate: 0.21,
-          quantity: 3,
-          index: 0
-        }
-      ],
-      total: 30
+      cartItems: [resultItem],
+      total: getGrossTotalOf(resultItem)
     })
   })
 
@@ -78,18 +78,20 @@ describe('cartReducer', () => {
       index: i
     }))
 
+    const resultItems = items.slice(0, 10)
+
     const { result } = renderHook(() =>
       useReducer(cartReducer, {
         ...initialState,
-        cartItems: items.slice(0, 10),
-        total: 100
+        cartItems: resultItems,
+        total: resultItems.reduce((acc, cur) => acc + getGrossTotalOf(cur), 0)
       })
     )
 
     expect(result.current[0]).toEqual({
       ...initialResult,
-      cartItems: items.slice(0, 10),
-      total: 100
+      cartItems: resultItems,
+      total: resultItems.reduce((acc, cur) => acc + getGrossTotalOf(cur), 0)
     })
 
     act(() => {
@@ -98,9 +100,9 @@ describe('cartReducer', () => {
 
     expect(result.current[0]).toEqual({
       ...initialResult,
-      cartItems: items.slice(0, 10),
+      cartItems: resultItems,
       maxProductsReached: true,
-      total: 100
+      total: resultItems.reduce((acc, cur) => acc + getGrossTotalOf(cur), 0)
     })
   })
 
@@ -140,7 +142,7 @@ describe('cartReducer', () => {
     expect(result.current[0]).toEqual({
       ...initialResult,
       cartItems: [item],
-      total: 10
+      total: getGrossTotalOf(item)
     })
 
     act(() => {
@@ -151,7 +153,7 @@ describe('cartReducer', () => {
       ...initialResult,
       cartItems: [{ ...item, quantity: 5 }],
       message: "It was added up to this item's maximum of 5 units.",
-      total: 50
+      total: getGrossTotalOf({ ...item, quantity: 5 })
     })
   })
 
@@ -160,14 +162,14 @@ describe('cartReducer', () => {
       useReducer(cartReducer, {
         ...initialState,
         cartItems: [item],
-        total: 10
+        total: getGrossTotalOf(item)
       })
     )
 
     expect(result.current[0]).toEqual({
       ...initialResult,
       cartItems: [item],
-      total: 10
+      total: getGrossTotalOf(item)
     })
 
     act(() => {
@@ -190,18 +192,20 @@ describe('cartReducer', () => {
       index: i
     }))
 
+    const resultItems = items.slice(0, 10)
+
     const { result } = renderHook(() =>
       useReducer(cartReducer, {
         ...initialState,
-        cartItems: items.slice(0, 10),
-        total: 100
+        cartItems: resultItems,
+        total: resultItems.reduce((acc, cur) => acc + getGrossTotalOf(cur), 0)
       })
     )
 
     expect(result.current[0]).toEqual({
       ...initialResult,
-      cartItems: items.slice(0, 10),
-      total: 100
+      cartItems: resultItems,
+      total: resultItems.reduce((acc, cur) => acc + getGrossTotalOf(cur), 0)
     })
 
     act(() => {

@@ -29,6 +29,10 @@ export const initialState: State = {
   message: null
 }
 
+export const getGrossTotalOf = (item: CartItemType) => {
+  return item.price * item.quantity * (1 + item.taxRate / 100)
+}
+
 const cartReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case 'ADD_ITEM': {
@@ -51,8 +55,9 @@ const cartReducer = (state: State, action: Action): State => {
 
           const updatedTotal =
             state.total -
-            existingItem.price * existingItem.quantity +
-            itemUptoMax.price * itemUptoMax.quantity
+            getGrossTotalOf(existingItem) +
+            getGrossTotalOf(itemUptoMax)
+
           const quantityMessage = itemUptoMax.quantity > 1 ? 's' : ''
 
           const updatedCartItems = [...state.cartItems]
@@ -77,7 +82,7 @@ const cartReducer = (state: State, action: Action): State => {
         return {
           ...state,
           cartItems: updatedCartItems,
-          total: state.total + updatedItem.price * updatedItem.quantity
+          total: state.total + getGrossTotalOf(updatedItem)
         }
       }
 
@@ -94,7 +99,7 @@ const cartReducer = (state: State, action: Action): State => {
         index: state.cartItems.length,
         quantity: item.quantity
       }
-      const newTotal = state.total + item.price * item.quantity
+      const newTotal = state.total + getGrossTotalOf(item)
 
       return {
         ...state,
@@ -106,8 +111,7 @@ const cartReducer = (state: State, action: Action): State => {
     case 'REMOVE_ITEM': {
       const { index } = action.payload
       const itemToRemove = state.cartItems[index]
-      const updatedTotal =
-        state.total - itemToRemove.price * itemToRemove.quantity
+      const updatedTotal = state.total - getGrossTotalOf(itemToRemove)
       const updatedCartItems = state.cartItems.filter(
         (cartItem) => cartItem.index !== index
       )

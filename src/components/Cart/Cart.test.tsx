@@ -1,7 +1,8 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from './Cart'
-import { ShoppingCartProvider } from '../../cartStore/ShoppingCart'
+import { ShoppingCartProvider } from '../../store/CartStore'
+import { getGrossTotalOf } from 'store/Reducer'
 
 describe('Cart', () => {
   const mockItems = [
@@ -55,6 +56,21 @@ describe('Cart', () => {
 
   it('displays items in the cart', () => {
     expect(screen.getAllByTestId('cart-item')).toHaveLength(mockItems.length)
+  })
+
+  it("displays item's name, price, quantity and gross subtotal", () => {
+    const deleteItemButtons = screen.getAllByTestId('delete-item-button')
+    const productName = screen.getByText(mockItems[0].productName)
+    const price = screen.getByText(`$${mockItems[0].price}`)
+    const quantity = screen.getByText(mockItems[0].quantity.toString())
+    const grossValue = getGrossTotalOf(mockItems[0]).toFixed(2)
+    const total = screen.getByText(new RegExp(grossValue, 'i'))
+
+    expect(deleteItemButtons).toHaveLength(2)
+    expect(productName).toBeInTheDocument()
+    expect(price).toBeInTheDocument()
+    expect(quantity).toBeInTheDocument()
+    expect(total).toBeInTheDocument()
   })
 
   it('should remove the correct item when its delete button is clicked', () => {

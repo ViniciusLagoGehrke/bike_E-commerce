@@ -1,7 +1,7 @@
 import { CartItemType } from '../../types'
 import CartItem from './CartItem'
 import Button from '../Button'
-import { useShoppingCart } from '../../cartStore/ShoppingCart'
+import { useShoppingCart } from '../../store/CartStore'
 
 type itemsProp = Omit<CartItemType, 'index'>[]
 
@@ -47,7 +47,7 @@ function Cart() {
               <th className="text-left font-medium">Product</th>
               <th className="text-left font-medium">Unit Price</th>
               <th className="text-left font-medium">Amount</th>
-              <th className="text-left font-medium">Price</th>
+              <th className="text-left font-medium">Subtotal with Tax</th>
             </tr>
           </thead>
           <tbody>{renderItems(state.cartItems)}</tbody>

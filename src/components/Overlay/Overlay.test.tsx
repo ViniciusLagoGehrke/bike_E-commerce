@@ -1,8 +1,8 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { ShoppingCartProvider } from '../../cartStore/ShoppingCart'
+import { ShoppingCartProvider } from '../../store/CartStore'
 import OverlayWrapper from './OverlayWrapper'
-import { State } from 'cartStore/Reducer'
+import { State } from 'store/Reducer'
 
 describe('OverlayWrapper', () => {
   const MockMessage = 'TESTING'

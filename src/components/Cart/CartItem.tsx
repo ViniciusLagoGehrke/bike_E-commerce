@@ -1,15 +1,33 @@
 import { TrashIcon } from '../../assets/TrashIcon'
-import { useShoppingCart } from '../../cartStore/ShoppingCart'
+import { useShoppingCart } from '../../store/CartStore'
+import { getGrossTotalOf } from '../../store/Reducer'
 import { CartItemType } from '../../types'
 
 type CartItemProps = Omit<CartItemType, 'maxAmount'>
 
-function CartItem({ index, productName, price, quantity }: CartItemProps) {
+function CartItem({
+  index,
+  productName,
+  price,
+  quantity,
+  taxRate
+}: CartItemProps) {
   const { dispatch } = useShoppingCart()
 
   const handleItemRemove = () => {
     dispatch({ type: 'REMOVE_ITEM', payload: { index: index as number } })
   }
+
+  const currentItem = {
+    id: '',
+    maxAmount: quantity,
+    index,
+    productName,
+    price,
+    quantity,
+    taxRate
+  }
+  const grossValue = getGrossTotalOf(currentItem)
 
   return (
     <tr data-testid="cart-item" className="h-8 border-b last:border-none">
@@ -23,7 +41,7 @@ function CartItem({ index, productName, price, quantity }: CartItemProps) {
       <td className="font-normal">{productName}</td>
       <td className="font-normal">${price}</td>
       <td className="font-normal">{quantity}</td>
-      <td className="font-normal">${(price * quantity).toFixed(2)}</td>
+      <td className="font-normal">${grossValue.toFixed(2)}</td>
     </tr>
   )
 }

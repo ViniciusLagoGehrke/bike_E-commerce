@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { ShoppingCartProvider } from '../../cartStore/ShoppingCart'
+import { ShoppingCartProvider } from '../../store/CartStore'
 import Header from './Header'
 
 describe('Header', () => {
@@ -48,7 +48,7 @@ describe('Header', () => {
   it('should render the header', () => {
     expect(screen.getByText('Your Shop!')).toBeInTheDocument()
     expect(
-      screen.getByText(`Total: $${mockState.total.toFixed(2)}`)
+      screen.getByText(`Gross Total: $${mockState.total.toFixed(2)}`)
     ).toBeInTheDocument()
     expect(screen.getByTestId('shopping-cart-toggle')).toBeInTheDocument()
   })
