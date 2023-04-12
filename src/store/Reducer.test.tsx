@@ -1,6 +1,7 @@
 import { useReducer } from 'react'
 import { renderHook, act } from '@testing-library/react'
-import cartReducer, { initialState, getGrossTotalOf } from './Reducer'
+import cartReducer, { initialState } from './Reducer'
+import { getGrossTotalOf } from '../utils'
 
 describe('cartReducer', () => {
   const initialResult = {

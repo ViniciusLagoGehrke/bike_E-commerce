@@ -14,7 +14,7 @@
 
 - [x] As a customer I want to be able to see the unit price in my shopping cart.
 
-- [ ] There is a value "taxRate" that calculate the gross price for each product.
+- [x] There is a value "taxRate" that calculate the gross price for each product.
 
 - [x] As a customer I want to be able to see the total of the shopping cart at any time
 

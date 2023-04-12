@@ -2,7 +2,7 @@ import { vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import Cart from './Cart'
 import { ShoppingCartProvider } from '../../store/CartStore'
-import { getGrossTotalOf } from 'store/Reducer'
+import { getGrossTotalOf } from '../../utils'
 
 describe('Cart', () => {
   const mockItems = [

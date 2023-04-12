@@ -1,4 +1,5 @@
 import { CartItemType } from '../types'
+import { getGrossTotalOf } from '../utils'
 
 export type State = {
   cartItems: CartItemType[]
@@ -27,10 +28,6 @@ export const initialState: State = {
   MAX_ITEMS,
   isCartClosed: true,
   message: null
-}
-
-export const getGrossTotalOf = (item: CartItemType) => {
-  return item.price * item.quantity * (1 + item.taxRate / 100)
 }
 
 const cartReducer = (state: State, action: Action): State => {

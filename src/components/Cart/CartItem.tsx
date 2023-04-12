@@ -1,6 +1,6 @@
 import { TrashIcon } from '../../assets/TrashIcon'
 import { useShoppingCart } from '../../store/CartStore'
-import { getGrossTotalOf } from '../../store/Reducer'
+import { getGrossTotalOf } from '../../utils'
 import { CartItemType } from '../../types'
 
 type CartItemProps = Omit<CartItemType, 'maxAmount'>
