@@ -42,10 +42,12 @@ This project uses many tools like:
 - [Tailwindcss](https://tailwindcss.com)
 - [Eslint](https://eslint.org)
 - [Prettier](https://prettier.io)
+- [Docker](https://www.docker.com/)
 
 ## Getting Started
 
-For this project I used Node.js v19.7.0 and PNPM v7.30.0
+For this project I used Node.js v19.7.0.
+Alternatively you can run a container with the project in development mode using [Docker-Compose](https://docs.docker.com/compose/)
 
 ### Install
 
@@ -61,6 +63,14 @@ Access the project directory.
 cd bike_E-commerce
 ```
 
+#### Running on your machine
+
+Make sure you are using the same Node version.
+
+```bash
+node -v
+```
+
 Install dependencies. (I suggest using PNPM)
 
 ```bash
@@ -71,6 +81,41 @@ Serve with hot reload at <http://localhost:5173>.
 
 ```bash
 pnpm run dev
+```
+
+#### Using Docker
+
+Build and run the container
+
+```bash
+docker-compose up --build --no-recreate -d
+```
+
+Check if the container is running (optional)
+
+```bash
+docker-compose ps
+```
+
+Access the command line inside the container
+
+```bash
+docker exec -it vite_docker sh
+```
+
+Install the dependencies and run the app
+
+```bash
+npm i && npm run dev
+```
+
+Open your browser at *http://localhost:8000/*
+You can edit the app and it will update on the browser
+
+Whenever you want to stop the app just stop the container
+
+```bash
+docker-compose down
 ```
 
 ### Lint
