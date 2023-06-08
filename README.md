@@ -47,7 +47,7 @@ This project uses many tools like:
 ## Getting Started
 
 For this project I used Node.js v19.7.0.
-Alternatively you can run a container with the project in development mode using [Docker-Compose](https://docs.docker.com/compose/)
+Alternatively you can run a container with the project in development mode using [Docker](https://docs.docker.com/)
 
 ### Install
 
@@ -85,28 +85,40 @@ pnpm run dev
 
 #### Using Docker
 
-Build and run the container
+Build a image from the dockerfile
 
 ```bash
-docker-compose up --build --no-recreate -d
+docker build -t vite-image .
+```
+
+Check if the image was created (optional)
+
+```bash
+docker images
+```
+
+Create a container from the image
+
+```bash
+docker run -it --name vite-react -p 8000:8000 --mount type=bind,source=$(pwd),target=/srv/app vite-image
 ```
 
 Check if the container is running (optional)
 
 ```bash
-docker-compose ps
+docker ps
 ```
 
 Access the command line inside the container
 
 ```bash
-docker exec -it vite_docker sh
+docker exec -it vite-react sh
 ```
 
 Install the dependencies and run the app
 
 ```bash
-npm i && npm run dev
+yarn && yarn dev
 ```
 
 Open your browser at *http://localhost:8000/*
@@ -115,7 +127,7 @@ You can edit the app and it will update on the browser
 Whenever you want to stop the app just stop the container
 
 ```bash
-docker-compose down
+docker stop vite-react
 ```
 
 ### Lint
